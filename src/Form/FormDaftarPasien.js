@@ -19,9 +19,6 @@ function FormDaftarPasien() {
        const datas = await fetch(`${process.env.REACT_APP_TMBHDTP}`,{
             method:"POST",
             body: forms
-        }).then((res)=>{
-            alert("data berhasil ditambahkan")
-            Nav('/')
         })
         .catch((err)=> { return Nav('/error_page')})
 
@@ -29,6 +26,8 @@ function FormDaftarPasien() {
        
         document.getElementById("data-form").reset();
         SetLoad(false)
+        alert("data berhasil ditambahkan")
+        Nav('/')
 
 
     }
