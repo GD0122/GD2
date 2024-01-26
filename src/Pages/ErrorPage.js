@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function ErrorPage() {
+
+    const Nav = useNavigate()
     useEffect(()=>{
         setInterval(()=>{
             Nav('/')
