@@ -15,13 +15,13 @@ function Tmbh_jdwal() {
         setLoad(true)
         const formEl = document.getElementById("jdwl-form")
         e.preventDefault()
-        console.log(formEl)
+       
         const formData = new FormData(formEl)
-        console.log(formData)
+       
        const datas = await fetch(`${process.env.REACT_APP_TMBHJDWL}`,{
             method: "POST",
             body: formData
-        }).then((res)=>console.log("success"))
+        })
         .catch((err)=> { return Nav('/error_page')})
         document.getElementById("jdwl-form").reset();
         setLoad(false)

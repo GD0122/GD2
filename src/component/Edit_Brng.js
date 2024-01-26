@@ -42,7 +42,7 @@ var today = year + "-" + month + "-" + day;
            const datas = await fetch(`${process.env.REACT_APP_EDTBRNG}`,{
               method:"POST",  
               body: formData
-            }).then((res)=>console.log("success"))
+            })
             .catch((err)=> { return Nav('/error_page')})
             document.getElementById("edt_brng").reset();
             Nav("/Stock_barang")

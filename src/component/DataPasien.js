@@ -47,7 +47,7 @@ function DataPasien() {
        getDatas()
     },[datap,isLoad])
   return (
-    <div className='data-pasien'style={{marginTop:'100px',minHeight:'860px'}} >
+    <div className='data-pasien'style={{marginTop:'100px',minHeight:'1000px'}} >
         {isLoad?(  
         <div >
            

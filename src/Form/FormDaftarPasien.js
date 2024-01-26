@@ -15,7 +15,7 @@ function FormDaftarPasien() {
         e.preventDefault()
         
         const forms = new FormData(formEl)
-        console.log(Object.fromEntries(forms))
+        
        const datas = await fetch(`${process.env.REACT_APP_TMBHDTP}`,{
             method:"POST",
             body: forms

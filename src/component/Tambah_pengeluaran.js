@@ -16,9 +16,9 @@ import { useNavigate } from 'react-router-dom';
     setLoad(true)
     const formEl = document.getElementById("form_pembelian")
         e.preventDefault()
-        console.log(formEl)
+       
         const formData = new FormData(formEl)
-        console.log(formData)
+        
        const datas = await fetch(`${process.env.REACT_APP_TMBHPNG1}`,{
           method:"POST",  
           body: formData
