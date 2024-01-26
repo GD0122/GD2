@@ -1,0 +1,30 @@
+.data-pasien{
+    top:0;
+    margin-top: 5%;
+    align-items: center;
+    justify-content: center;
+    
+}
+.container-datap{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    animation: timbul 1s ;
+    scale: 1;
+}
+@keyframes timbul {
+ from{
+    scale: 0;
+ }
+ to{
+    scale: 1;
+ }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .data-pasien {
+        margin-top: 5%;
+        padding-top:10%;
+    }
+  }
