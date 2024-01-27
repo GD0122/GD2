@@ -28,14 +28,14 @@ function Header() {
           
     
             <NavDropdown title="Administrasi" id="basic-nav-dropdown">
-              <NavDropdown.Item href="Pembelian_barang">
+              <NavDropdown.Item href="/Pembelian_barang">
                 Pembelian Barang
               </NavDropdown.Item>
               <NavDropdown.Item href="/Stock_barang">
                 Stock Barang
               </NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="total">
+              <NavDropdown.Item href="/total">
                 Total Pendapatan & Pengeluaran
               </NavDropdown.Item>
              
