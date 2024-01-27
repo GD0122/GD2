@@ -19,10 +19,10 @@ export default function Formpasien(){
         e.preventDefault()
         
         const forms = new FormData(formEl)
-       const datas = await fetch(`${process.env.DT3}`,{
+       const datas = await fetch("https://script.google.com/macros/s/AKfycbzL0hExtS229SnAMZRh14_oQwQxq2dq8FhHMHyMmzSEwKD76sKCJ2a-LNtq39n2FhGsyA/exec",{
             method:"POST",
             body: forms
-        })
+        }).then((res)=>console.log("success"))
         .catch((err)=> { return Nav('/error_page')})
 
         //pendapatan
@@ -38,11 +38,11 @@ export default function Formpasien(){
         const byr = document.getElementById("byr").value
         const ttldpt = dpt - byr 
         datapend.append("Bersih", ttldpt)
-        const pend = await fetch(`${process.env.DT2}`,{
+        const pend = await fetch("https://script.google.com/macros/s/AKfycbwy7E4eHZ9q2yYhQf997I7D6vW72gYg8YUXHesA-FCkdsZmzQXJFhsmGisjbOT-pWrV/exec",{
             method:'Post',
             body:datapend
 
-        })
+        }).then((res)=>console.log("success"))
         .catch((err)=> { return Nav('/error_page')})
 
         //pengeluaran
@@ -55,16 +55,17 @@ export default function Formpasien(){
         pmbyrn.append("Bersih",byr2)
         const ketbyr = "Pembayaran Dokter dengan nama Dokter " + namaDok
         pmbyrn.append("Ket",ketbyr)
-        const pmbyr = await fetch(`${process.env.DT1}`,{
+        const pmbyr = await fetch("https://script.google.com/macros/s/AKfycbwy7E4eHZ9q2yYhQf997I7D6vW72gYg8YUXHesA-FCkdsZmzQXJFhsmGisjbOT-pWrV/exec",{
             method:'Post',
             body:pmbyrn
 
-        })
+        }).then((res)=>console.log("success"))
         .catch((err)=> { return Nav('/error_page')})
 
        
         document.getElementById("data-form").reset();
         SetLoad(false)
+        alert("Data berhasil ditambahkan")
         Nav('/detail_pasien/'+dataP.map((data)=>data.NoTelp))
 
 
@@ -91,7 +92,8 @@ export default function Formpasien(){
         try {
             const getDatas = await api.get()
             const getPas = getDatas.data.data
-            const getPasien = getPas.filter((data)=>data.NoTelp,toString() === nama_pasien)
+            const getPasien = getPas.filter((data)=>data.NoTelp.toString() === nama_pasien)
+          
             setDataP(getPasien.map((data=>data)))
         } catch (error) {
           return Nav('/error_page')
@@ -102,7 +104,7 @@ export default function Formpasien(){
     },[])
    
     return(
-        <div >
+        <div style={{margin:'0px 20px'}}>
              <div className="form-pasien" >
             <h1>Form Pasien Dental</h1>
             <div className="form-container" style={{display:'block',position:'static'}}>
