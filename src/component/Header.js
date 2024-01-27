@@ -7,7 +7,7 @@ import "./header.css"
 import test from '../logo/logo6.png'
 function Header() {
   return (
-    <div>
+    <div style={{zIndex:'10000'}}>
       <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand ><img src={test} className='images image-cover'/></Navbar.Brand>

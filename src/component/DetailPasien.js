@@ -134,16 +134,7 @@ function  DetailPasien() {
                                 <td colSpan={4}>Belum ada Rekam Medis</td>
                             </tr>
                         )}
-                         {rkm && rkm?.map((data,i)=>{
-                             return (
-                                 <tr key={i}>
-                                     <td>{new Date(data.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})}</td>
-                                     <td>{data.Diagnosa}</td>
-                                     <td>{data.Terapi}</td>
-                                     <td>{data.Keterangan}</td>
-                                 </tr>
-                             )
-                         })}
+                         
                      </tbody>
                  </Table>
              </div>
