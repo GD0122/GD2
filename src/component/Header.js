@@ -5,12 +5,17 @@ import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import "./header.css"
 import test from '../logo/logo6.png'
+import { useNavigate } from 'react-router';
 function Header() {
+  const Navigate = useNavigate
+  const goHome = async()=>{
+    Navigate('/')
+  }
   return (
     <div style={{zIndex:'10000'}}>
       <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand ><img src={test} className='images image-cover'/></Navbar.Brand>
+        <Navbar.Brand onClick={()=>goHome()}><img src={test} className='images image-cover'/></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className='navbars'>
           <Nav className="me-auto">

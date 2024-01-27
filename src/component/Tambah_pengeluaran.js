@@ -41,7 +41,7 @@ import { useNavigate } from 'react-router-dom';
           dats.append("Tanggal",dataTgl)
           dats.append("Ket",jns)
         
-          const dataP = await fetch(`${process.env.EACT_APP_TMBHPNG2}`,{
+          const dataP = await fetch("https://script.google.com/macros/s/AKfycbwy7E4eHZ9q2yYhQf997I7D6vW72gYg8YUXHesA-FCkdsZmzQXJFhsmGisjbOT-pWrV/exec",{
             method:"Post",
             body:dats
           })
