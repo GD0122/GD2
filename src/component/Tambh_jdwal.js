@@ -5,6 +5,7 @@ import { useState,useEffect } from "react";
 import "./tmbh_jdwl.css"
 import { useNavigate,useParams } from 'react-router-dom';
 import api from '../api/DataPasien'
+import '../component/datapasien.css'
 function Tmbh_jdwal() {
     const [load,setLoad] = useState(false)
     let {nama_pasien} = useParams()
@@ -63,7 +64,7 @@ function Tmbh_jdwal() {
       
 
   return (
-    <div className="form-pasien" style={{minHeight:'860px'}}>
+    <div className="containers">
         <div>
             <h1>Tambah Jadwal</h1>
         </div>
@@ -104,7 +105,7 @@ function Tmbh_jdwal() {
                 )
             })}
                 
-                <Button variant="primary" type="submit" >
+                <Button variant="primary" type="submit"  style={{marginTop:'5px'}} >
                      Tambah Jadwal
                 </Button>
                 </fieldset>

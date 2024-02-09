@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import Table from 'react-bootstrap/esm/Table';
+import './total.css'
 export default function SubPendapatan(data) {
 
     const [total,setTotal] = useState()
@@ -26,9 +27,9 @@ export default function SubPendapatan(data) {
     },[data])
 
   return (
-    <div style={{border:"3px solid black", borderRadius:'10px',margin:'5px'}}>
+    <div className='container-total'>
         <div>
-            <h1 style={{fontSize:'20px'}}>Data Pendapatan Bulan {new Date(data?.children?.searchM).toLocaleString('id',{month:'long'})}</h1>
+            <h1  className='header-total'>Data Pendapatan Bulan {new Date(data?.children?.searchM).toLocaleString('id',{month:'long'})}</h1>
         </div>
         <div>
         <Table style={{fontSize:'10px'}} striped bordered hover variant="dark">

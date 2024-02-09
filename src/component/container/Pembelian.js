@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import Table from 'react-bootstrap/Table';
-
+import './total.css'
 export default function Pembelian(data) {
   const [total,setTotal] = useState()
 
@@ -21,10 +21,10 @@ const datas = data && data?.children?.map((data)=>data.Bersih)
     sumSimpleArray(datas)
   },[data,total])
   return (
-    <div style={{border:"3px solid black", borderRadius:'10px',margin:'5px'}}>
+    <div className='container-total'>
       <div>
         <div >
-          <h1 style={{fontSize:'20px'}}>Data Semua Pembelian</h1>
+          <h1 className='header-total'>Data Semua Pembelian</h1>
         </div>
             <div>
               <Table style={{fontSize:'10px'}} striped bordered hover variant="dark">

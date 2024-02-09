@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom'
 import api from '../api/DataBrng';
 import { useNavigate } from 'react-router-dom';
 import LoadingPage from '../Pages/LoadingPage';
+import '../component/datapasien.css'
 function Edit_Brng(datas) {
     let {nama_barang} = useParams()
     const [barang,setBarang] = useState()
@@ -54,7 +55,7 @@ var today = year + "-" + month + "-" + day;
     },[barang])
 
   return (
-    <div style={{minHeight:'1000px'}}>
+    <div className='containers'>
         {isLoad?(
         <>
          <div style={{marginTop:'100px'}}>

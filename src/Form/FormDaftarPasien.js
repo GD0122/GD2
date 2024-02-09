@@ -1,8 +1,9 @@
 import React from 'react'
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/esm/Button'
-import { useState,useEffect } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../component/datapasien.css'
 function FormDaftarPasien() {
     const [load,SetLoad] = useState(false)
     const Nav = useNavigate()
@@ -47,8 +48,8 @@ function FormDaftarPasien() {
          
       }
   return (
-    <div style={{margin:'100px 10px 10px',minHeight:'850px'}}>
-        <div>
+    <div className='containers'>
+        <div >
             <h1>Daftar Pasien Baru</h1>
         </div>
         <div>

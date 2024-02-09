@@ -5,6 +5,7 @@ import Button from "react-bootstrap/esm/Button";
 import { useState,useEffect} from "react";
 import api from '../api/DataPasien'
 import { useParams,useNavigate } from "react-router-dom";
+import '../component/datapasien.css'
 
 export default function Formpasien(){
     const [load,SetLoad] = useState(false)
@@ -104,8 +105,8 @@ export default function Formpasien(){
     },[])
    
     return(
-        <div style={{margin:'0px 20px'}}>
-             <div className="form-pasien" >
+        <div className="containers">
+             <div  >
             <h1>Form Pasien Dental</h1>
             <div className="form-container" style={{display:'block',position:'static'}}>
 

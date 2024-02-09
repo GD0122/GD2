@@ -8,6 +8,7 @@ import Pembayaran from './container/Pembayaran'
 import SubPembayaran from './container/SubPembayaran'
 import Pendapatan from './container/Pendapatan'
 import SubPendapatan from './container/SubPendapatan'
+import '../component/datapasien.css'
 function Total() {
     const years = new Date().getFullYear()
     const month = new Date().getMonth()+1
@@ -79,11 +80,11 @@ function Total() {
   
     useEffect(()=>{
      getData()
-      console.log("hello")
+
     },[getData(),dataPembayaran,dataPembelian,dataPendapatan])
   return (
-    <div style={{minHeight:'860px'}}>
-        <div style={{marginTop:'100px'}}>
+    <div className='containers'>
+        <div>
             <h1>Total Pendapatan Dan Pengeluaran</h1>
         </div>
         

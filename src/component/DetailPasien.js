@@ -7,6 +7,7 @@ import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/esm/Button'
 import LoadingPage from '../Pages/LoadingPage'
 import api from '../api/Datajdwl';
+import '../component/datapasien.css'
 
 function  DetailPasien() {
     let {nama_pasien} = useParams()
@@ -68,7 +69,7 @@ function  DetailPasien() {
     },[data])
 
   return (
-    <div style={{margin:'100px 10px 10px',minHeight:'850px'}}>
+    <div className='containers'>
         <div >
           {isReady?(
              <div>

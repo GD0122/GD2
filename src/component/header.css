@@ -11,7 +11,29 @@
     height: 50px;
     object-fit: scale-down;
   }
-  
+  .span-header{
+    background-image: linear-gradient(180deg,purple,white);
+    min-width: 200px;
+    height: 50px;
+    display: block;
+    position:absolute;
+    top:10px;
+    bottom: 0;
+    border-radius: 50px 20px;
+    z-index: -100;
+    background-size: 200% 200%;
+    animation: Animation 10s ease infinite;
+    /* -moz-animation: Animation 5s ease infinite;
+    animation: Animation 5s ease infinite; */
+
+  }
+
+  @keyframes Animation {
+    0%{background-position:10% 0%}
+    50%{background-position:91% 100%}
+    100%{background-position:10% 0%}
+}
+
   /* .image-cont {
     object-fit: contain;
     object-position: center;

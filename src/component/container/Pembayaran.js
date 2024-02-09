@@ -1,5 +1,6 @@
 import React, {useState,useEffect} from 'react'
 import Table from 'react-bootstrap/Table';
+import './total.css'
 
 export default function Pembayaran(data) {
 
@@ -23,9 +24,9 @@ export default function Pembayaran(data) {
     },[data,total])
 
   return (
-    <div style={{marginTop:'100px', border:'3px solid black', margin:'5px',borderRadius:'10px'}}>
+    <div className='container-total'>
         <div>
-            <h1 style={{fontSize:'20px'}}>Data Semua Pembayaran Dokter</h1>
+            <h1 className='header-total' >Data Semua Pembayaran Dokter</h1>
         </div>
         <div>
         <Table style={{fontSize:'10px'}} striped bordered hover variant="dark">

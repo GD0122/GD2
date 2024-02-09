@@ -1,5 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Table from 'react-bootstrap/Table';
+import './total.css'
+
 export default function (data) {
 
     const [total,setTotal] = useState()
@@ -16,15 +18,15 @@ export default function (data) {
       }
       setTotal(sum)
       
-  }
+     }
   const datas = data && data?.children?.map((data)=>data.Bersih)
     useEffect(()=>{
       sumSimpleArray(datas)
     },[data,total])
   return (
-    <div style={{border:"3px solid black", borderRadius:'10px',margin:'5px'}}>
+    <div className='container-total'>
         <div>
-            <h1 style={{fontSize:'20px'}}>Data Semua Pendapatan</h1>
+            <h1 className='header-total'>Data Semua Pendapatan</h1>
         </div>
         <div>
         <Table style={{fontSize:'10px'}} striped bordered hover variant="dark">

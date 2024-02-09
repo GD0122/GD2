@@ -1,8 +1,13 @@
-.data-pasien{
+.containers{
     top:0;
-    margin-top: 5%;
     align-items: center;
     justify-content: center;
+    padding: 80px 10px 10px 10px;
+    min-height: 1000px;
+    background-size: cover;
+    background-image: url("../logo/bg.jpg");
+    color: white;
+
     
 }
 .container-datap{
@@ -12,6 +17,20 @@
     animation: timbul 1s ;
     scale: 1;
 }
+.card-pas{
+        color: white;
+        border-radius: 2%;
+        border: 6px solid white;
+        border-image-slice: 1;
+        background-image: linear-gradient(170deg, purple, pink);
+      
+}
+.border-purple {
+    border-image-source: linear-gradient(180deg, purple, white);
+  }
+.card-pas:hover{
+    cursor: pointer;
+}
 @keyframes timbul {
  from{
     scale: 0;
@@ -20,6 +39,7 @@
     scale: 1;
  }
 }
+
 
 
 @media only screen and (max-width: 600px) {

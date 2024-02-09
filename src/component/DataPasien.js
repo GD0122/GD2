@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import LoadingPage from '../Pages/LoadingPage';
 import Form from 'react-bootstrap/Form'
 
+
 function DataPasien() {
     const [datap,SetDatap] = useState([]);
     const [search,setSearch] = useState("")
@@ -47,12 +48,12 @@ function DataPasien() {
        getDatas()
     },[datap,isLoad])
   return (
-    <div className='data-pasien'style={{marginTop:'100px',minHeight:'1000px'}} >
+    <div className='containers' >
         {isLoad?(  
         <div >
            
         <div >
-            <h1>Data Pasien</h1>
+            <h1 style={{color:'white'}}>Data Pasien</h1>
             <div style={{margin:'10px',alignItems:'center',display:'flex',justifyContent:'center'}}>
             <Form className="d-flex" >
             <Form.Control
@@ -81,13 +82,13 @@ function DataPasien() {
                        
                         <div key={i} >
                            
-                             <Card  style={{ width: '18rem',margin:'10px' }} onClick={()=>goToDetail(data.NoTelp)}>
-                             <Card.Header>Galuh Dental</Card.Header>
+                             <Card style={{ width: '18rem',margin:'10px' }} className='card-pas border-purple' onClick={()=>goToDetail(data.NoTelp)}>
+                             <Card.Header >Galuh Dental</Card.Header>
                                 <Card.Body>
-                                <Card.Title>Nama Pasien: {data.Nama}</Card.Title>
+                                <Card.Title style={{fontSize:'13px'}}>Nama Pasien: {data.Nama}</Card.Title>
                                 <Card.Text>Umur : {data.Umur}</Card.Text>
-                                <Card.Text>Alamat: {data.Alamat}</Card.Text>
-                                <Card.Text>Info Kontak: {data.NoTelp}</Card.Text>
+                                {/* <Card.Text>Alamat: {data.Alamat}</Card.Text> */}
+                                {/* <Card.Text>Info Kontak: {data.NoTelp}</Card.Text> */}
                                 
                       <Card.Footer>
                       <small className="text-muted">Tanggal Daftar :  {new Date(data?.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})}</small>

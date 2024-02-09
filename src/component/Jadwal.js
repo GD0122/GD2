@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import api from '../api/Datajdwl';
-import Button from 'react-bootstrap/esm/Button';
 import "./jadwal.css"
-import Card from 'react-bootstrap/Card'
 import Table from 'react-bootstrap/esm/Table';
 import { useNavigate } from 'react-router-dom';
+import '../component/datapasien.css'
 
 function Jadwal() {
     const [jdwl,Setjdwl] = useState([])
@@ -53,7 +52,7 @@ function Jadwal() {
     },[jdwl])
     
   return (
-    <div style={{marginBottom:'30px',minHeight:'860px'}}>
+    <div className='containers'>
         <div> 
         <h1 style={{marginTop:"100px",marginBottom:'30px'}}>Jadwal</h1>
         </div>

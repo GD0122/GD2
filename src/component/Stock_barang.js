@@ -4,6 +4,7 @@ import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
 import LoadingPage from '../Pages/LoadingPage';
+import '../component/datapasien.css'
 function Stock_barang() {
 
  const [dataBrng,setDataBrng] = useState()
@@ -29,7 +30,7 @@ const Edit_data = async(data)=>{
  },[[dataBrng]])
 
   return (
-    <div style={{minHeight:'1000px'}}>
+    <div className='containers'>
         {isReady?(
             <div>
             <div style={{marginTop:'100px'}}>

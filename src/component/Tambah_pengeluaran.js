@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../component/datapasien.css'
 
  function Tambah_pengeluaran() {
   const [load,setLoad] = useState(false)
@@ -69,8 +70,8 @@ import { useNavigate } from 'react-router-dom';
   }
 
   return (
-    <div style={{minHeight:'860px'}}>
-        <div style={{marginTop:'100px'}}>
+    <div className='containers' >
+        <div >
             <h1>Tambah Barang</h1>
         </div>
         <div style={{padding:'5%'}}>
