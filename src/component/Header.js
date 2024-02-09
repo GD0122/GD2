@@ -4,7 +4,7 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import "./header.css"
-import test from '../logo/logo6.png'
+
 
 function Header() {
 
@@ -13,7 +13,7 @@ function Header() {
       <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href='/' >
-           <span className='span-header'></span><img src={test} className='images image-cover'/></Navbar.Brand>
+           <span className='span-header'></span><img  className='images image-cover'/></Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className='navbars'>
           <Nav className="me-auto">
