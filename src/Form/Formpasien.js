@@ -105,8 +105,8 @@ export default function Formpasien(){
     },[])
    
     return(
-        <div className="containers">
-             <div  >
+        <div className="containers bg">
+            <div  >
             <h1>Form Pasien Dental</h1>
             <div className="form-container" style={{display:'block',position:'static'}}>
 

@@ -21,6 +21,7 @@ import DetailPasien from './component/DetailPasien.js';
 import Footer from './component/Footer.js';
 import Page404 from './Pages/Page404.js';
 import ErrorPage from './Pages/ErrorPage.js';
+import ScrolltoTop from './component/ScrolltoTop.js';
 
 function App() {
   return (
@@ -28,7 +29,9 @@ function App() {
 
         <Header />
         <Router>
+          <ScrolltoTop>
           <Routes>
+            
             <Route path='/' element={<DataPasien/>}/>
             <Route path='/tambah_data' element={<FormDaftarPasien/>}/>
             <Route path='/tambah_data/:nama_pasien' element={<Formpasien/>}/>
@@ -43,6 +46,7 @@ function App() {
             <Route path='/error_page' element={<ErrorPage/>}/>
             <Route path='*' element={<Page404/>}/>
           </Routes>
+          </ScrolltoTop>
         </Router>
         <Footer/>
         {/* <Formpasien/> */}

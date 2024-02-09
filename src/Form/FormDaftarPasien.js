@@ -48,7 +48,7 @@ function FormDaftarPasien() {
          
       }
   return (
-    <div className='containers'>
+    <div className='containers bg'>
         <div >
             <h1>Daftar Pasien Baru</h1>
         </div>

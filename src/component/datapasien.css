@@ -4,12 +4,30 @@
     justify-content: center;
     padding: 80px 10px 10px 10px;
     min-height: 1000px;
-    background-size: cover;
-    background-image: url("../logo/bg.jpg");
+    background-size: 300px,cover;
+    background-image:url('../logo/tooth.png'),url('../logo/bg.jpg');
+    background-position: right bottom, left top;
+    background-repeat: no-repeat, repeat;
     color: white;
+   
 
     
 }
+/* .bg{
+    background-image: url('../logo/tooth.png'),url('../logo/bg.jpg');
+    background-position: right bottom, left top;
+    background-repeat: no-repeat;
+    background-size: 100px 100px,cover;
+    bottom:0;
+   
+   
+} */
+
+@media print {
+    .containers {
+      image-resolution: from-image 300dpi;
+    }
+  }
 .container-datap{
     display: flex;
     justify-content: center;
