@@ -66,7 +66,7 @@ function  DetailPasien() {
     useEffect(()=>{
         getDatas()
         getJadwal()
-    },[data])
+    },[])
 
   return (
     <div className='containers'>

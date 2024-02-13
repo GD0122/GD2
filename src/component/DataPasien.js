@@ -25,11 +25,13 @@ function DataPasien() {
             const datas = res.data.data
     
             SetDatap(datas)
-       
+         
            
      
         }catch(err){
-          return Nav('/error_page')
+          
+          return  Nav('/error_page')
+         
         }
        
     }
@@ -44,6 +46,7 @@ function DataPasien() {
  
     useEffect(()=>{
        getDatas()
+      
     },[])
   return (
     <div className='containers' >

@@ -52,7 +52,7 @@ var today = year + "-" + month + "-" + day;
    
     useEffect(()=>{
         getDataBrng()
-    },[barang])
+    },[])
 
   return (
     <div className='containers'>

@@ -27,7 +27,7 @@ const Edit_data = async(data)=>{
  useEffect(()=>{
     CheckBarang()
   
- },[[dataBrng]])
+ },[])
 
   return (
     <div className='containers'>

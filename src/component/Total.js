@@ -81,7 +81,7 @@ function Total() {
     useEffect(()=>{
      getData()
 
-    },[getData(),dataPembayaran,dataPembelian,dataPendapatan])
+    },[])
   return (
     <div className='containers'>
         <div>

@@ -47,9 +47,8 @@ function Jadwal() {
   
 
     useEffect(()=>{
-      
         data_jdwl()
-    },[jdwl])
+    },[])
     
   return (
     <div className='containers'>
