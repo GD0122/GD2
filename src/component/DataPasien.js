@@ -43,10 +43,8 @@ function DataPasien() {
    
  
     useEffect(()=>{
-   
- 
        getDatas()
-    },[datap,isLoad])
+    },[])
   return (
     <div className='containers' >
         {isLoad?(  

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import "../component/datapasien.css"
 
 function ErrorPage() {
 
@@ -10,8 +11,8 @@ function ErrorPage() {
         },5000)
     })
   return (
-    <div>
-        <div style={{minHeight:'1000px',display:'flex',alignItems:'center'}}>
+    <div className='containers'>
+        <div >
             <h1>Maaf Permintaan anda tidak bisa diteruskan</h1>
         </div>
     </div>

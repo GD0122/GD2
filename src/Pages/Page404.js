@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import '../component/datapasien.css'
 
 function Page404() {
     const Nav = useNavigate()
@@ -9,8 +10,8 @@ function Page404() {
         },5000)
     },[])
   return (
-    <div>
-        <div  style={{zIndex:'3000', minHeight:'1000px',width:'100%',display:'flex',margin:'0px',alignItems:'center',justifyContent:'center'}}>
+    <div className='containers'>
+        <div  >
             <h1>Page Belum Tersedia</h1>
         </div>
     </div>
