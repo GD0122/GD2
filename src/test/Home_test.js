@@ -4,28 +4,20 @@ import Data_test from '../api/Data_test'
 import DataPasien from '../api/DataPasien'
 
 function Home_test() {
-    const getData = async()=>{
-      const test = await axios.get(`https://script.google.com/macros/s/AKfycbyFPW2ZJ0CEy_61VP0yQP3BUok8AaE8BYktRvYOGd387fidVOPtyQS108PtjZflZkdd/exec`,{
-        method:'Get',
-        headers:{
-           Accept: "application/json", "Accept-Encoding": "identity",
-  
-        },
-        body:{
-          "key":"test123"
-        },
-        params:{trophies:true}
+   async function getData(){
+    let apiUrl = "https://script.google.com/macros/s/exec"
+    try {
+      const data = await fetch(apiUrl,{
+        method:"GET",
+        headers:{accept:'apication/json'}
       })
-      console.log(test.data)
+      const datas = await data.json()
+      console.log("hello",datas)
+    } catch (error) {
+      console.log("hellos",error)
     }
-    function clearConsole() { 
-      if(window.console || window.console.firebug) {
-         console.clear();
-      }
-  }
-
-    getData()
-    clearConsole()
+   }
+   getData()
   return (
     <div style={{margin:'100px 10px 10px 10px',minWidth:'100%',minHeight:'100vh'}}>
         <div>
