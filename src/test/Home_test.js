@@ -8,10 +8,11 @@ function Home_test() {
     let apiUrl = "/.netlify/functions/getData"
     try {
       const data = await fetch(apiUrl,{
-        method:"GET",
+        method: "GET",
+        headers: { accept: "application/json" },
       
       })
-      console.log(data)
+      console.log(data.data)
     } catch (error) {
       console.log("hellos",error)
     }
