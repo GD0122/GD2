@@ -11,8 +11,7 @@ function Home_test() {
         method:"GET",
       
       })
-      const decodedData = Buffer.from(data, 'base64').toString('utf-8');
-      console.log("hello",decodedData)
+      console.log(data)
     } catch (error) {
       console.log("hellos",error)
     }
