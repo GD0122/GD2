@@ -5,7 +5,7 @@ import DataPasien from '../api/DataPasien'
 
 function Home_test() {
    async function getData(){
-    let apiUrl = "https://script.google.com/macros/s/exec"
+    let apiUrl = "/.netlify/functions/getData"
     try {
       const data = await fetch(apiUrl,{
         method:"GET",
