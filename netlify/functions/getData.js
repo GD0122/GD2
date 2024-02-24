@@ -10,7 +10,7 @@ exports.handler = async(event,context)=>{
        })
       
 
-       let data = response
+       let data = response.data.data
       
        return{
         statusCode:200,
