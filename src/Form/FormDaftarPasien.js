@@ -4,9 +4,12 @@ import Button from 'react-bootstrap/esm/Button'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import '../component/datapasien.css'
+import { useSelector } from 'react-redux'
+import { SelUsers } from '../Redux/Reducer/_Users'
 function FormDaftarPasien() {
     const [load,SetLoad] = useState(false)
     const Nav = useNavigate()
+
     
     async function Submit(e){
         notEmpty()
@@ -51,6 +54,7 @@ function FormDaftarPasien() {
     <div className='containers bg'>
         <div >
             <h1>Daftar Pasien Baru</h1>
+        
         </div>
         <div>
         <Form className="form" id="data-form" onSubmit={(e)=>Submit(e)} >

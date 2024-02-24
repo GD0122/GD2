@@ -22,6 +22,8 @@ function DataPasien() {
         
         try{
             const res = await api.get()
+            console.log(res)
+           
             const datas = res.data.data
     
             SetDatap(datas)

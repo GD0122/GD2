@@ -6,8 +6,11 @@ import "./tmbh_jdwl.css"
 import { useNavigate,useParams } from 'react-router-dom';
 import api from '../api/DataPasien'
 import '../component/datapasien.css'
+import { useSelector } from 'react-redux';
+import { SelUsers } from '../Redux/Reducer/_Users';
 function Tmbh_jdwal() {
     const [load,setLoad] = useState(false)
+ 
     let {nama_pasien} = useParams()
     const Nav = useNavigate()
     const [getP,setGetP] = useState()
