@@ -10,18 +10,18 @@ exports.handler = async(event,context)=>{
         params:{trophies:true}
        })
        let datas = response.data
-       const o = JSON.stringify(datas).split('');
-       for(var i = 0, l = o.length; i < l; i++)
-         if(o[i] == '{')
-             o[i] = '}';
-         else if(o[i] == '}')
-             o[i] = '{';
-        const data= encodeURI(salt + o.join(''));
+    //    const o = JSON.stringify(datas).split('');
+    //    for(var i = 0, l = o.length; i < l; i++)
+    //      if(o[i] == '{')
+    //          o[i] = '}';
+    //      else if(o[i] == '}')
+    //          o[i] = '{';
+    //     const data= encodeURI(salt + o.join(''));
       
       
        return{
         statusCode:200,
-        body: ({data})
+        body: ({datas})
        }
     } catch (error) {
         return{
