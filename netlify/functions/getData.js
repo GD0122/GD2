@@ -1,12 +1,12 @@
 const axios = require('axios')
-requre("dotenv").config()
+require("dotenv").config()
 
 exports.handler = async(event,context)=>{
+    console.log("hello")
     try {
        let response = await axios.get(`https://script.google.com/macros/s/${process.env.REACT_APP_KEY}/exec`,{
         Headers:{Accept:'application/json',"Accept-Encoding":"identity"},
         params:{trophies:true}
-
        })
 
        let data = response.data
