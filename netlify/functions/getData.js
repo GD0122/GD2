@@ -3,7 +3,7 @@ require("dotenv").config()
 
 exports.handler = async(event,context)=>{
     const salt = "HJSHdjajshjdhasyduyshJHJUSyui187suiU7s6d678"
-    console.log("hello")
+   
     try {
        let response = await axios.get(`https://script.google.com/macros/s/${process.env.REACT_APP_KEY}/exec`,{
         Headers:{Accept:'application/json',"Accept-Encoding":"identity"},
@@ -16,7 +16,7 @@ exports.handler = async(event,context)=>{
              o[i] = '}';
          else if(o[i] == '}')
              o[i] = '{';
-     const data= encodeURI(salt + o.join(''));
+        const data= encodeURI(salt + o.join(''));
       
       
        return{

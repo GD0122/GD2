@@ -9,7 +9,8 @@ function Home_test() {
     let apiUrl = `/.netfily/functions/getData`
     try {
       const data = await axios.get(apiUrl,{
-       
+        Headers:{Accept:'application/json'},
+        params:{trophies:true}
       
       })
       // const datas = Buffer.from(data, 'base64').toString('utf-8');
