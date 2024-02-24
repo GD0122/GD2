@@ -9,10 +9,10 @@ function Home_test() {
     try {
       const data = await fetch(apiUrl,{
         method:"GET",
-        headers:{accept:'apication/json'}
+      
       })
-      const datas = await data.json()
-      console.log("hello",datas)
+      const decodedData = Buffer.from(data, 'base64').toString('utf-8');
+      console.log("hello",decodedData)
     } catch (error) {
       console.log("hellos",error)
     }
