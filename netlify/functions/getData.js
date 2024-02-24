@@ -2,6 +2,7 @@ const axios = require('axios')
 require("dotenv").config()
 
 exports.handler = async(event,context)=>{
+    const salt = "HJSHdjajshjdhasyduyshJHJUSyui187suiU7s6d678"
     console.log("hello")
     try {
        let response = await axios.get(`https://script.google.com/macros/s/${process.env.REACT_APP_KEY}/exec`,{
