@@ -8,11 +8,13 @@ exports.handler = async(event,context)=>{
         Headers:{Accept:'application/json',"Accept-Encoding":"identity"},
         params:{trophies:true}
        })
+      
 
        let data = response.data
+       let encode =  Buffer.from(data).toString('base64')
        return{
         statusCode:200,
-        body: JSON.stringify({data})
+        body: JSON.stringify({encode})
        }
     } catch (error) {
         return{
