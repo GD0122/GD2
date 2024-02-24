@@ -6,10 +6,10 @@ import DataPasien from '../api/DataPasien'
 function Home_test() {
    let salt = 'f844b09ff50c'
    async function getData(){
-    // let apiUrl = "/.netlify/functions/getData"
-    const testUrl = "http://localhost:5500/api/testers/tester"
+    let apiUrl = "/.netlify/functions/getData"
+    // const testUrl = "http://localhost:5500/api/testers/tester"
     try {
-      const data = await axios(testUrl,{
+      const data = await axios(apiUrl,{
         method: "GET",
         headers: { accept: "application/json" },
         
