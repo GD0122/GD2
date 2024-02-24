@@ -5,14 +5,16 @@ import DataPasien from '../api/DataPasien'
 
 function Home_test() {
    async function getData(){
-    let apiUrl = "/.netlify/functions/getData"
+    const salt = "HJSHdjajshjdhasyduyshJHJUSyui187suiU7s6d678"
+    let apiUrl = `/.netfily/functions/getData`
     try {
-      const data = await fetch(apiUrl,{
-        method:"GET",
+      const data = await axios.get(apiUrl,{
+       
       
       })
-      const decodedData = Buffer.from(data, 'base64').toString('utf-8');
-      console.log("hello",decodedData)
+      // const datas = Buffer.from(data, 'base64').toString('utf-8');
+    
+      console.log("hello",data)
     } catch (error) {
       console.log("hellos",error)
     }
