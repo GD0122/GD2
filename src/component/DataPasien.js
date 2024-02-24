@@ -98,7 +98,7 @@ function DataPasien() {
                       </Card.Footer>
                       </Card.Body>
                       </Card>
-                        </div>      
+                      </div>      
                     )
                 })
             }

@@ -8,13 +8,18 @@ exports.handler = async(event,context)=>{
         Headers:{Accept:'application/json',"Accept-Encoding":"identity"},
         params:{trophies:true}
        })
+       let datas = response.data
+       const o = JSON.stringify(datas).split('');
+       for(var i = 0, l = o.length; i < l; i++)
+        if(o[i] == '{')
+            o[i] = '}';
+        else if(o[i] == '}')
+            o[i] = '{';
+     const data= encodeURI(salt + o.join(''));
       
-
-       let data = response.data
-       let encode =  Buffer.from(data).toString('base64')
        return{
         statusCode:200,
-        body: JSON.stringify({encode})
+        body: ({data})
        }
     } catch (error) {
         return{
