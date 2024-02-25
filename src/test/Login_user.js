@@ -36,7 +36,7 @@ function Login_user() {
     if (user) {
       
       axios
-          .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${localStorage.getItem('access_dental')}`, {
+          .get(`/.netlify/exec2?access=${localStorage.getItem('access_token')}`, {
               headers: {
                   Authorization: `Bearer ${user.access_token}`,
                   Accept: 'application/json'
