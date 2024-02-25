@@ -5,9 +5,11 @@ import Card from 'react-bootstrap/Card'
 import { useNavigate } from 'react-router-dom';
 import LoadingPage from '../Pages/LoadingPage';
 import Form from 'react-bootstrap/Form'
+import CryptoJS from 'crypto-js';
 
 
 function DataPasien() {
+   const salt = process.env.REACT_APP_SALT
     const [datap,SetDatap] = useState([]);
     const [search,setSearch] = useState("")
     const search_parameters = Object.keys(Object.assign({}, ...datap));
@@ -22,17 +24,20 @@ function DataPasien() {
         
         try{
             const res = await api.get()
-            console.log(res)
-           
-            const datas = res.data.data
+            console.log(res.data.outPars)
+            const outPars = res.data.outPars
+            const bytes=  CryptoJS.AES.decrypt(outPars, salt)
+            const dataD = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+            console.log("thsatas",dataD)
+          
     
-            SetDatap(datas)
+            SetDatap(dataD.data)
          
            
      
         }catch(err){
           
-          return  Nav('/error_page')
+          // return  Nav('/error_page')
          
         }
        

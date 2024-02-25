@@ -4,12 +4,12 @@ import { useGoogleLogin,googleLogout } from '@react-oauth/google'
 import axios from 'axios'
 import { useDispatch, useSelector } from 'react-redux'
 import { Active, Logout, SelUsers} from '../Redux/Reducer/_Users'
-
+import CryptoJS from "crypto-js";
 
 function Login_user() {
   const [user,setUser] = useState([])
   const profile = useSelector(SelUsers)
- 
+  let salt = 'f844b09ff50c'
 
   const dispatch = useDispatch()
 
@@ -30,23 +30,19 @@ function Login_user() {
 };
 
 
-
   useEffect(()=>{
  
     if (user) {
-      
-      axios
-          .get(`/.netlify/exec2?access=${localStorage.getItem('access_token')}`, {
-              headers: {
-                  Authorization: `Bearer ${user.access_token}`,
-                  Accept: 'application/json'
-              }
-          })
-          .then(async(res) => {
-            await dispatch(Active(res.data))
-            
-          })
-          .catch((err) => console.log(err));
+      axios.get(`http://localhost:5500/api/testers/tes?data=${localStorage.getItem('access_dental')}`,{
+      headers:{Accept:'application/json'}
+    }
+    ).then(async(res)=>{
+      console.log("that",res.data.outPars)
+      const outPars = res.data.outPars
+      const bytes=  CryptoJS.AES.decrypt(outPars, salt)
+      const dataD = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+      await dispatch(Active(dataD))
+    }).catch((err) => console.log(err));
   }
   },[user])
   

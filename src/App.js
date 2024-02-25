@@ -25,7 +25,7 @@ import ScrolltoTop from './component/ScrolltoTop.js';
 import _Logins from './Pages/_Logins.js';
 import React,{useState,useEffect} from 'react';
 import _UsersVal from './Pages/_UsersVal.js';
-import Home_test from './test/Home_test.js';
+
 
 
 
@@ -45,7 +45,7 @@ function App() {
           <Routes>
         
            <Route path='/login' element={<_Logins/>} />
-           <Route path='/' element={<_UsersVal><Home_test/></_UsersVal>}/>
+           <Route path='/' element={<_UsersVal><DataPasien/></_UsersVal>}/>
     
 
 

@@ -6,7 +6,9 @@ import "../component/datapasien.css"
 import axios from 'axios'
 import {useDispatch } from 'react-redux'
 import { Active } from '../Redux/Reducer/_Users'
+import CryptoJS from "crypto-js";
 function _Logins() {
+  let salt = process.env.REACT_APP_SALT
   const [user,setUser] = useState([])
     const navs = useNavigate()
     const dispatch = useDispatch()
@@ -22,23 +24,20 @@ function _Logins() {
 
     useEffect(()=>{
       if (user) {
-        console.log("hello")
-        axios
-            .get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${localStorage.getItem('access_dental')}`, {
-                headers: {
-                    Authorization: `Bearer ${user.access_token}`,
-                    Accept: 'application/json',
-                    "Accept-Encoding":'identity',
-                },
-                params:{thropies:true}
-            })
-            .then(async(res) => {
-              await dispatch(Active(res.data))
-              alert("Telah Login")
-              navs('/')
+        axios.get(`/.netlify/functions/exec2`,{
+          headers:{Accept:'application/json'}
+        }
+        ).then(async(res)=>{
+          
+          const outPars = res.data.outPars
+          const bytes=  CryptoJS.AES.decrypt(outPars, salt)
+          const dataD = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+          await dispatch(Active(dataD))
+          alert("Telah Login")
+          navs('/')
               
             })
-            .catch((err) => console.log(err));
+            .catch((err) => {alert("Sorry something wrong")});
           }
   },[user])
      

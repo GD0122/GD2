@@ -4,7 +4,7 @@ const axios = require('axios')
 require("dotenv").config()
 const cryptoJS = require('crypto-js')
 exports.handler = async(event,context)=>{
-    let salt = 'f844b09ff50c'
+    let salt =  process.env.REACT_APP_SALT
     const tests = {data:{message:"hello",test:"test"}}
     try {
         const data = await axios.get(`https://script.google.com/macros/s/${process.env.REACT_APP_KEY}/exec`,{
@@ -17,17 +17,6 @@ exports.handler = async(event,context)=>{
             JSON.stringify(dataPals),
             salt
           ).toString();
-        console.log(datas)
-        // return res.status(200).json({datas})
-     
-//  const tests = data.data
-//         const o = JSON.stringify(tests).split('');
-//         for(var i = 0, l = o.length; i < l; i++)
-//             if(o[i] == '{')
-//                 o[i] = '}';
-//             else if(o[i] == '}')
-//                 o[i] = '{';
-//         const datas= encodeURI(salt + o.join(''));
       
        return{
         statusCode:200,
