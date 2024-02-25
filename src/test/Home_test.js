@@ -10,7 +10,7 @@ function Home_test() {
     let apiUrl = "/.netlify/functions/exec"
     const testUrl = "http://localhost:5500/api/testers/tester"
     
-      const data = await axios(testUrl,{
+      const data = await axios(apiUrl,{
         method: "GET",
         headers: { accept: "application/json" },
         
