@@ -3,6 +3,7 @@ require("dotenv").config()
 
 exports.handler = async(event,context)=>{
     let salt = 'f844b09ff50c'
+    const tests = {data:{message:"hello",test:"test"}}
     try {
         const data = await axios.get(`https://script.google.com/macros/s/${process.env.REACT_APP_KEY}/exec`,{
             Headers:{Accept:'application/json',"Accept-Encoding":"identity"},
