@@ -7,7 +7,7 @@ import CryptoJS from "crypto-js";
 function Home_test() {
    let salt = 'f844b09ff50c'
    async function getData(){
-    let apiUrl = "/.netlify/functions/Ones"
+    let apiUrl = "/.netlify/functions/exec"
     // const testUrl = "http://localhost:5500/api/testers/tester"
     
       const data = await axios(apiUrl,{
