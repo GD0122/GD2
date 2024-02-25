@@ -3,7 +3,7 @@ require("dotenv").config()
 const cryptoJS = require('crypto-js')
 exports.handler = async(event,context)=>{
     let salt = process.env.REACT_APP_SALT
-    const {access} = event.quryStringParameters
+    // const {access} = event.quryStringParameters
     try {
         const data = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${localStorage.getItem('access_dental')}`,{
             Headers:{Authorization: `Bearer ${localStorage.getItem('access_dental')}`,
@@ -20,18 +20,6 @@ exports.handler = async(event,context)=>{
             salt
           ).toString();
    
-     
-        
-        // return res.status(200).json({datas})
-     
-//  const tests = data.data
-//         const o = JSON.stringify(tests).split('');
-//         for(var i = 0, l = o.length; i < l; i++)
-//             if(o[i] == '{')
-//                 o[i] = '}';
-//             else if(o[i] == '}')
-//                 o[i] = '{';
-//         const datas= encodeURI(salt + o.join(''));
       
        return{
         statusCode:200,

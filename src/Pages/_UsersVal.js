@@ -11,7 +11,7 @@ function _UsersVal({children}) {
    const Navs = useNavigate()
   
    const getUsers = async()=>{
-    const getUser = axios.get(`http://localhost:5500/api/testers/tes?data=${localStorage.getItem('access_dental')}`,{
+    const getUser = axios.get(`/.netlify/functions/exec2`,{
         headers:{Accept:'application/json'},
         params:{tropies:true} 
       }).then(async(res)=>{
