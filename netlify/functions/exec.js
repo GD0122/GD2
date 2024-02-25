@@ -1,8 +1,8 @@
 
-const cryptoJS = require('crypto-js')
+
 const axios = require('axios')
 require("dotenv").config()
-
+const cryptoJS = require('crypto-js')
 exports.handler = async(event,context)=>{
     let salt = 'f844b09ff50c'
     const tests = {data:{message:"hello",test:"test"}}
@@ -12,12 +12,12 @@ exports.handler = async(event,context)=>{
             params:{trophies:true}
         })
      
-        // const dataPals = data.data
-        // const datas = cryptoJS.AES.encrypt(
-        //     JSON.stringify(dataPals),
-        //     salt
-        //   ).toString();
-        // console.log(datas)
+        const dataPals = data.data
+        const dataG = cryptoJS.AES.encrypt(
+            JSON.stringify(dataPals),
+            salt
+          ).toString();
+        console.log(datas)
         // return res.status(200).json({datas})
      
  const tests = data.data
@@ -31,7 +31,7 @@ exports.handler = async(event,context)=>{
       
        return{
         statusCode:200,
-        body: JSON.stringify({datas})
+        body: JSON.stringify({dataG})
        }
     } catch (error) {
         return{
