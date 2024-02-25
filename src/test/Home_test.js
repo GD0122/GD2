@@ -8,9 +8,9 @@ function Home_test() {
    let salt = 'f844b09ff50c'
    async function getData(){
     let apiUrl = "/.netlify/functions/exec"
-    // const testUrl = "http://localhost:5500/api/testers/tester"
+    const testUrl = "http://localhost:5500/api/testers/tester"
     
-      const data = await axios(apiUrl,{
+      const data = await axios(testUrl,{
         method: "GET",
         headers: { accept: "application/json" },
         

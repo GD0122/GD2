@@ -13,25 +13,25 @@ exports.handler = async(event,context)=>{
         })
      
         const dataPals = data.data
-        const dataG = cryptoJS.AES.encrypt(
+        const datas = cryptoJS.AES.encrypt(
             JSON.stringify(dataPals),
             salt
           ).toString();
         console.log(datas)
         // return res.status(200).json({datas})
      
- const tests = data.data
-        const o = JSON.stringify(tests).split('');
-        for(var i = 0, l = o.length; i < l; i++)
-            if(o[i] == '{')
-                o[i] = '}';
-            else if(o[i] == '}')
-                o[i] = '{';
-        const datas= encodeURI(salt + o.join(''));
+//  const tests = data.data
+//         const o = JSON.stringify(tests).split('');
+//         for(var i = 0, l = o.length; i < l; i++)
+//             if(o[i] == '{')
+//                 o[i] = '}';
+//             else if(o[i] == '}')
+//                 o[i] = '{';
+//         const datas= encodeURI(salt + o.join(''));
       
        return{
         statusCode:200,
-        body: JSON.stringify({dataG})
+        body: JSON.stringify({datas})
        }
     } catch (error) {
         return{
