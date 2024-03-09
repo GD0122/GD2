@@ -4,32 +4,49 @@ import "./jadwal.css"
 import Table from 'react-bootstrap/esm/Table';
 import { useNavigate } from 'react-router-dom';
 import '../component/datapasien.css'
-
+import dataP from '../api/Datass'
+import * as moment from 'moment'
+import 'moment/locale/id'
+import CryptoJS from 'crypto-js';
+import LoadingPage from '../Pages/LoadingPage';
+import { _Decrypt } from '../Config/_Decrypt';
 function Jadwal() {
-    const [jdwl,Setjdwl] = useState([])
-    const [today,SetToday] = useState([])
-    const dates = new Date().toLocaleDateString()
-    const DataFound = today.length !==0
-    const nextDataFound = jdwl.length !==0
-    
-    
+  const salt = process.env.REACT_APP_SALT
+    const [next,setNext] = useState([])
+    const [today,setToday] = useState([])
 
+    const DataFound = today?.length !==0
+    const nextDataFound = next?.length !==0
+    
    
-
-
     const data_jdwl = async()=>{
       try {
-        const getJdwl = await api.get()
-        const datJdwl = getJdwl.data.data
-        const getNext = datJdwl.filter((data)=> ((new Date(data.Tanggal)-new Date(dates))/(1000 * 60 * 60 * 24)) > 0)
-        const getD = datJdwl.filter((data)=>
-          new Date(data.Tanggal).toLocaleDateString() === dates
-        )
+        // const getJdwl = await dataP.get()
+        // .then((res)=>{
+        //     const outPars1 = res.data.out2
+         
+        //     const bytes1=  CryptoJS.AES.decrypt(outPars1, salt)
+        //     const dataD1 = JSON.parse(bytes1.toString(CryptoJS.enc.Utf8))
+          
+          
+        //    const day = dataD1['data'].filter((data)=>new moment(data.Tanggal).format('LL') === new moment().format('LL'))
+        //    setToday(day)
+        //    const nextD = dataD1['data'].filter((data)=>new moment().diff(data.Tanggal)<0)
+        //    setNext(nextD)
+           
+
+        // })
+
+        const local_pas = JSON.parse(localStorage.getItem('data_jad'))
+        const day = local_pas.filter((data)=>new moment(data.Tanggal).format('LL')  === new moment().format('LL'))
+        setToday(day)
+        const nex = local_pas.filter((data)=>new moment().diff(data.Tanggal)<0)
+         setNext(nex)
+     
     
       
        
-        SetToday(getD)
-        Setjdwl(getNext)
+       
         
       } catch (error) {
         return Nav('/error_page')
@@ -38,10 +55,13 @@ function Jadwal() {
     }
 
     const chatsWA = async(data)=>{
-      window.location.href='https://wa.me/'+data
+      const num =  _Decrypt(data)
+      window.location.href='https://wa.me/+62'+num
   }
   const Nav = useNavigate()
+
   const goToDetail = async(info)=>{
+
     Nav(('/detail_pasien/')+info)
   }
   
@@ -52,15 +72,22 @@ function Jadwal() {
     
   return (
     <div className='containers'>
-        <div> 
-        <h1 style={{marginTop:"100px",marginBottom:'30px'}}>Jadwal</h1>
-        </div>
+      {!DataFound&&!nextDataFound?
+        (<>
+          <LoadingPage/>
+        </>):
+        (
+      <div>
+          <div> 
+           <h1 style={{marginTop:"100px",marginBottom:'30px'}}>Jadwal</h1>
+           </div>
         <div>
           <div>
-            <p>Hari Ini : {new Date(dates).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'}) }</p>
-          </div>
+            <p>Hari ini: {moment().format('LL')}</p>
+           </div>
           <div className='container-jdwl'>
             <div>
+
             <Table  striped bordered hover variant="dark" style={{fontSize:'10px'}} >
                     <thead >
                       <tr >
@@ -78,7 +105,8 @@ function Jadwal() {
                                 <td>{data.Nama}</td>
                                 <td>{new Date(data.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})}</td>
                                 <td>{new Date(data.Jam).toLocaleString('id',{timeStyle:'short'}).replace('.',':')}</td>
-                                <td onClick={()=>{goToDetail(data.NoTlp)}}>Detail Pasien</td>
+                                <td onClick={()=>{goToDetail(data.Id)}}>Detail Pasien</td>
+                                <td onClick={()=>chatsWA(data.NoTelp)}>Hubungi via Whatsapp</td>
                                 </tr>
                               )
                             })
@@ -109,18 +137,20 @@ function Jadwal() {
                         <th scope="col">Jam</th>
                         <th scope="col">Detail Pasien</th>
                         <th scope='col'>Sisa Waktu</th>
+                        <th scope='col'>Info</th>
                       </tr>
                     </thead>
                     <tbody>
                       {nextDataFound?(
-                        jdwl?.map((data,i)=>{
+                        next?.map((data,i)=>{
                               return(
                                 <tr key={i}>
                                 <td>{data.Nama}</td>
                                 <td>{new Date(data.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})}</td>
                                 <td>{new Date(data.Jam).toLocaleString('id',{timeStyle:'short'}).replace('.',':')}</td>
-                                <td onClick={()=>{goToDetail(data.NoTlp)}}>Detail Pasien</td>
-                                <td>{((new Date(data.Tanggal)-new Date(dates))/(1000 * 60 * 60 * 24))}  Hari Lagi</td>
+                                <td onClick={()=>{goToDetail(data.Id)}}>Detail Pasien</td>
+                                <td>{new moment().diff(data.Tanggal,'days')}  Hari Lagi</td>
+                                <td onClick={()=>chatsWA(data.NoTlp)}>Hubungi via Whatsapp</td>
                                 </tr>
                               )
                             })
@@ -141,6 +171,11 @@ function Jadwal() {
 
           </div>
         </div>
+        </div>
+
+
+        )
+    }
         
         
     </div>

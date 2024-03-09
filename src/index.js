@@ -10,7 +10,7 @@ import { Test_context } from './test/Test_context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <GoogleOAuthProvider clientId='681504572844-usas32cn2fm092v2u64dfu10d0v4os83.apps.googleusercontent.com'>
+  <GoogleOAuthProvider clientId={process.env.REACT_APP_CID}>
   <React.StrictMode>
     <Provider store={_Store}>
         <App />

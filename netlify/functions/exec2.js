@@ -3,8 +3,9 @@ require("dotenv").config()
 const cryptoJS = require('crypto-js')
 exports.handler = async(event,context)=>{
     let salt = process.env.REACT_APP_SALT
-    const {peop} = event.quryStringParameters
+    const {peop} = event.queryStringParameters;
     try {
+       
         const getUser = await axios.get(`https://www.googleapis.com/oauth2/v1/userinfo?access_token=${peop}`,{
             Headers:{Authorization: `Bearer ${peop}`,
                 Accept:'application/json',"Accept-Encoding":"identity",
@@ -12,6 +13,7 @@ exports.handler = async(event,context)=>{
            },
             params:{trophies:true}
         }).then((res)=>{
+      
             return res.data
         })
         const dataPals = getUser

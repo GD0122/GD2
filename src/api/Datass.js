@@ -1,5 +1,8 @@
 import axios from 'axios'
 
 export default axios.create ({
-    baseURL:`${process.env.REACT_APP_DATASS}`,
+    baseURL:`/.netlify/functions/exec3`,
+    headers:{
+        Accept:'appication/json'
+    }
 })

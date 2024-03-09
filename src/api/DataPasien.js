@@ -4,7 +4,7 @@ import axios from 'axios'
 //     baseURL:`${process.env.REACT_APP_DATAPAS}`,
 // })
 export default axios.create ({
-    baseURL:`/.netlify/function/exec3`,
+    baseURL:`/.netlify/functions/exec`,
     headers:{
         Accept:'appication/json'
     }

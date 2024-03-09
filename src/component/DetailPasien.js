@@ -1,72 +1,100 @@
 import React from 'react'
 import { useEffect,useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
-import dataP from '../api/Datass'
-import info from '../api/DataPasien'
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/esm/Button'
 import LoadingPage from '../Pages/LoadingPage'
-import api from '../api/Datajdwl';
 import '../component/datapasien.css'
+import 'moment/locale/id'
+import * as moment from 'moment'
+import { useDispatch, useSelector } from 'react-redux'
+import TambahRekam from '../Modals/TambahRekam';
+import TambahJadwal from '../Modals/TambahJadwal';
+import { _Decrypt } from '../Config/_Decrypt';
+import { Bounce, toast } from 'react-toastify';
 
-function  DetailPasien() {
+ function  DetailPasien () {
+    const salt = process.env.REACT_APP_SALT
     let {nama_pasien} = useParams()
     const Nav = useNavigate()
-
-    const [data,setData] = useState()
+    // const DPas = useSelector(SelDetailP)
+    const [dataP,setDataP] = useState([])
     const [rkm,setRkm] = useState([])
     const [jdwl,setJdwl] = useState([])
-    const isReady = rkm !== undefined && data !== undefined && jdwl !== undefined
+    // const pasien=  useSelector(SelPasien)
+    // const rekam = useSelector(SelRekam)
+    // const jadwal = useSelector(SelJadwal)
+    const [showJ,setShowJ] = useState(false)
+   
     const checkRkm = rkm.length !== 0 
     const checkJdwl = jdwl.length !== 0
-    const dates = new Date().toLocaleDateString()
-
-    
-    const getDatas = async()=>{
-    
+    // const dates = new Date().toLocaleDateString()
+    const dispatch = useDispatch()
+  
+   
+    const isReady = dataP !== undefined  && rkm !== undefined && jdwl !== undefined
+    const [showR,setShowR] = useState(false)
+   
+  
+    //date
+    // const data = new Date(data.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})
+    // ((new Date(data.Tanggal)-new Date(dates))/(1000 * 60 * 60 * 24) <=0 ? ("Sudah terlewat"):(new Date(data.Tanggal)-new Date(dates))/(1000 * 60 * 60 * 24)+ " Hari Lagi")
+    const getData = async(pasien,rekam,jadwal)=>{
         try {
-            const data = await dataP.get()
-            const getDataP = data.data.data
-            const getDetails = await getDataP.filter((data)=>data.NoTlp.toString() === nama_pasien)
-            await setRkm(getDetails)
-            const detail = await info.get()
-            const detailPas = detail.data.data
-            const getPasien=await detailPas.filter((data)=> data.NoTelp.toString() === nama_pasien)
-            
-            await setData(getPasien)
-           
+            const local_pas = JSON.parse(localStorage.info_pas)
+            const local_pas1 = JSON.parse(localStorage.data_pas)
+            const local_pas2 = JSON.parse(localStorage.data_jad)
+              const getRkm = await local_pas.filter((data)=>data.Id === nama_pasien)
+              await setRkm(getRkm)
+ 
+             const getJdwl = await local_pas2.filter((data)=>data.Id === nama_pasien)
+             await setJdwl(getJdwl)
+ 
+             const getP = await local_pas1.filter((data)=>data.Id === nama_pasien)
+             await setDataP(getP)
+       
+
+          
+        } catch (error) {
+            toast.error('Gagal', {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                });
+        }
+       
         
-        } catch (error) {
-             return Nav('/error_page')
-        }
+    }
 
-    }
-    const getJadwal = async()=>{
-        try {
-            const data = await api.get()
-            const getJad = data.data.data
-            const getJdwl = await getJad.filter((data)=>data.NoTlp.toString()=== nama_pasien)
-            setJdwl(getJdwl)
-        } catch (error) {
-         return Nav('/error_page')
-        }
-    }
+
+
+    useEffect(()=>{
+        getData()
+       
+    },[])
+
  
 
     const TambahData = async(data)=>{
-        Nav('/tambah_data/'+data)
+        // Nav('/tambah_data/'+data)
+        setShowR(true)
     }
     const Tambh_Jdwl = async(data)=>{
-        Nav('/tmbah_jdwl/'+data)
+        // Nav('/tmbah_jdwl/'+data)
+        setShowJ(true)
     }
 
     const chatsWA = async(data)=>{
-        window.location.href='https://wa.me/+62'+data
+        const dats = _Decrypt(data)
+        window.location.href='https://wa.me/'+dats
     }
-    useEffect(()=>{
-        getDatas()
-        getJadwal()
-    },[])
+   
 
   return (
     <div className='containers'>
@@ -78,22 +106,25 @@ function  DetailPasien() {
              </div>
              <div style={{margin:'10px '}}>
                  <div>
-                     {data && data?.map((data,i)=>{
+                     {dataP && dataP?.map((data,i)=>{
                          
                          return(
-                             <div style={{margin:'10px'}}>
+                             <div key={i} style={{margin:'10px'}}>
                                 <div style={{textAlign:'left',border:'3px solid black',padding:'10px',borderRadius:'10px'}}>
                                  <h6>Nama Pasien: {data.Nama}</h6>
                                  <h6>Umur: {data.Umur}</h6>
                                  <h6>Alamat: {data.Alamat}</h6>
-                                 <h6>Info Kontak: +62 {data.NoTelp}</h6>
+                                 <h6>Info Kontak: { _Decrypt(data.NoTelp)}</h6>
                                  </div>
                                  <div style={{fontSize:'30px',display:'flex',justifyContent:'center', margin:'20px',alignContent:'center'}}>
-                                  <Button style={{margin:'10px',fontSize:'15px'}} onClick={()=>TambahData(data.NoTelp)}>Tambah Data Pasien</Button>
+                                  <Button style={{margin:'10px',fontSize:'15px'}} onClick={()=>TambahData()}>Tambah Data Pasien</Button>
                                   <Button style={{margin:'10px', fontSize:'15px'}} onClick={()=>Tambh_Jdwl(data.NoTelp)}> Tambah Jadwal Pasien</Button>
-                                 
                                  </div>
-                                 <Button style={{margin:'10px', fontSize:'15px',backgroundColor:'green'}}  onClick={()=>chatsWA(data.NoTelp)}>Whats App</Button>
+                                  <Button style={{margin:'10px', fontSize:'15px',backgroundColor:'green'}}  onClick={()=>chatsWA(data.NoTelp)}>Whats App</Button>
+                                 <div>
+                                     <TambahRekam Pid={data.Id} dataP={dataP} showR={showR} getD={getData} setShowR={setShowR}/>
+                                     <TambahJadwal Pid={data.Id} dataP={dataP} showR={showJ} getD={getData} setShowR={setShowJ}/>
+                                 </div>
                              </div>
                          )
                          
@@ -123,7 +154,7 @@ function  DetailPasien() {
                           rkm?.map((data,i)=>{
                             return (
                                 <tr key={i}>
-                                    <td>{new Date(data.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})}</td>
+                                    <td>{new moment(data.Tanggal).format('LL')}</td>
                                     <td>{data.Diagnosa}</td>
                                     <td>{data.Terapi}</td>
                                     <td>{data.Keterangan}</td>
@@ -151,14 +182,14 @@ function  DetailPasien() {
                         <th scope="col">Info Kontak</th>
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody >
                       {checkJdwl?(
                         jdwl?.sort(({Tanggal:prev},{Tanggal:current})=>new Date(prev) - new Date(current)).map((data,i)=>{
                               return(
-                                <tr key={i} style={{textAlign:'center',fontSize:'13px'}}>
-                                <td>{new Date(data.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})}</td>
-                                <td>{new Date(data.Jam).toLocaleString('id',{timeStyle:'short'}).replace('.',':')}</td>
-                                <td>{((new Date(data.Tanggal)-new Date(dates))/(1000 * 60 * 60 * 24) <=0 ? ("Sudah terlewat"):(new Date(data.Tanggal)-new Date(dates))/(1000 * 60 * 60 * 24)+ " Hari Lagi")}</td>
+                                <tr key={i} style={{textAlign:'center',fontSize:'10px'}}>
+                                <td>{new moment(data.Tanggal).format('LL')}</td>
+                                <td>{new moment(data.Jam).format('hh:mm')}</td>
+                                <td>{new moment().diff(data.Tanggal,'days') > 0? "Sudah Terlewat": (new moment().diff(data.Tanggal,'days') + " hari")}</td>
                                 <td onClick={()=>{chatsWA(data.NoTlp)}}>WhatsApp</td>
                                 </tr>
                               )
@@ -179,6 +210,7 @@ function  DetailPasien() {
      
          </div> 
           ):(<LoadingPage/>)}
+      
        
        
 

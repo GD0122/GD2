@@ -1,6 +1,7 @@
 import React,{useState,useEffect} from 'react'
 import Table from 'react-bootstrap/esm/Table';
 import './total.css'
+import { _Formater } from '../../Config/Formatter';
 export default function SubPendapatan(data) {
 
     const [total,setTotal] = useState()
@@ -51,7 +52,7 @@ export default function SubPendapatan(data) {
                         <p style={{borderBottom:"5px solid black"}}></p> */}
                 
                                 <td>{new Date(data.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})}</td>
-                                <td>{formater.format(data.Bersih).replace("IND","Rp.")}</td>
+                                <td>{_Formater.format(data.Bersih).replace("IND","Rp.")}</td>
                                 <td>{data.Ket}</td>
                              
                    
@@ -59,7 +60,7 @@ export default function SubPendapatan(data) {
                     
                 )
               })}
-              <tr><td colSpan={'3'}>Total Semua Pendapatan {formater.format(total).replace("IND","Rp.")}</td>
+              <tr><td colSpan={'3'}>Total Semua Pendapatan {_Formater.format(total).replace("IND","Rp.")}</td>
               </tr>
               </tbody>
               </Table>

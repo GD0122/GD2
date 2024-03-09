@@ -37,6 +37,7 @@ function Login_user() {
       headers:{Accept:'application/json'}
     }
     ).then(async(res)=>{
+      if(dataD?.email!==process.env.REACT_APP_VER)return dispatch(userLogout())
       console.log("that",res.data.outPars)
       const outPars = res.data.outPars
       const bytes=  CryptoJS.AES.decrypt(outPars, salt)

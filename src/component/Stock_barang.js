@@ -1,29 +1,35 @@
 import React, { useEffect, useState } from 'react'
-import api from '../api/DataBrng';
 import Card from 'react-bootstrap/Card'
 import Button from 'react-bootstrap/esm/Button';
 import { useNavigate } from 'react-router-dom';
 import LoadingPage from '../Pages/LoadingPage';
 import '../component/datapasien.css'
+import TambahBarang from '../Modals/TambahBarang';
+import EditBarang from '../Modals/EditBarang';
 function Stock_barang() {
 
  const [dataBrng,setDataBrng] = useState()
- const navigate = useNavigate()
+ const [show,setShow] = useState(false)
+ const [showE,setShowE] = useState(false)
+ const [active,setActive] = useState([])
  const isReady = dataBrng !== undefined
 
 const CheckBarang = async()=>{
     try {
-       const Brng =  await api.get()
-       const datBrng = Brng.data.data
-       setDataBrng(datBrng)
+
+       const local_pas = JSON.parse(localStorage.getItem('data_brng'))
+       setDataBrng(local_pas)
     } catch (error) {
-        return navigate('/error_page')
+      console.log('err')
     }
 }
 
 const Edit_data = async(data)=>{
-    navigate('/edit_barang/'+data)
+    setShowE(true)
+    setActive(data)
+
 }
+const showT = ()=>{setShow(true)}
  useEffect(()=>{
     CheckBarang()
   
@@ -35,6 +41,10 @@ const Edit_data = async(data)=>{
             <div>
             <div style={{marginTop:'100px'}}>
             <h1>Stock Barang</h1>
+            <div>
+                <Button onClick={showT}style={{background:'purple'}}>Tambah Barang</Button>
+                <TambahBarang showR={show} setShowR={setShow} checkB={CheckBarang} />   
+            </div>
         </div>
         <div style={{display:"flex",justifyContent:'center',flexWrap:'wrap',alignItems:"center"}}>
             {dataBrng&&dataBrng.map((data,i)=>{
@@ -51,8 +61,11 @@ const Edit_data = async(data)=>{
                       <small className="text-muted">Update Terakhir:  {new Date(data.Tanggal).toLocaleDateString()}</small>
                       </Card.Footer>
                     </Card.Body>
-                    <Button onClick={()=>{Edit_data(data.NamaBarang)}}>Edit Stock</Button>
+                         <Button onClick={()=>{Edit_data(data)}}>Edit Stock</Button>
                     </Card>
+                    <div>
+                        <EditBarang key={i} showR={showE} setShowR={setShowE} checkB={CheckBarang} data={active} />
+                    </div>
                     </div>
                 )
             })}

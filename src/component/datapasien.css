@@ -13,6 +13,11 @@
 
     
 }
+
+button.btn-modals{
+  float: right;
+  margin: 10px;
+}
 /* .bg{
     background-image: url('../logo/tooth.png'),url('../logo/bg.jpg');
     background-position: right bottom, left top;

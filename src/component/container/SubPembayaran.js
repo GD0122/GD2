@@ -1,14 +1,11 @@
 import React,{useState,useEffect} from 'react'
 import Table from 'react-bootstrap/Table';
 import './total.css'
+import { _Formater } from '../../Config/Formatter';
 export default function (datas) {
     const [total,setTotal] = useState()
 
 
-    const formater = new Intl.NumberFormat('id-ID',{
-        style:'currency',
-        currency:'ind'
-    })
     function sumSimpleArray(array) {
         let sum = 0;
         for(let i = 0; i < array?.length; i++) {
@@ -47,7 +44,7 @@ export default function (datas) {
                         <p style={{borderBottom:"5px solid black"}}></p> */}
                 
                                 <td>{new Date(data.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})}</td>
-                                <td>{formater.format(data.Bersih).replace("IND","Rp.")}</td>
+                                <td>{_Formater.format(data.Bersih).replace("IND","Rp.")}</td>
                                 <td>{data.Ket}</td>
                              
                    
@@ -55,7 +52,7 @@ export default function (datas) {
                     
                 )
               })}
-              <tr><td colSpan={'3'}>Total Semua Pembayaran {formater.format(total).replace("IND","Rp.")}</td>
+              <tr><td colSpan={'3'}>Total Semua Pembayaran {_Formater.format(total).replace("IND","Rp.")}</td>
               </tr>
                 </tbody>
                 </Table>

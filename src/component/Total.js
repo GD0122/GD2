@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import Form from 'react-bootstrap/Form'
-import apis from '../api/DataAdm'
+import apis from '../api/Datass'
 import Pembelian from './container/Pembelian'
 import SubPembelian from './container/SubPembelian'
 import Button from 'react-bootstrap/esm/Button'
@@ -9,6 +9,7 @@ import SubPembayaran from './container/SubPembayaran'
 import Pendapatan from './container/Pendapatan'
 import SubPendapatan from './container/SubPendapatan'
 import '../component/datapasien.css'
+import moment from 'moment'
 function Total() {
     const years = new Date().getFullYear()
     const month = new Date().getMonth()+1
@@ -43,15 +44,16 @@ function Total() {
     const getFullData = async()=>{
        setSelected(true)
         try {
-            const fullData = await apis.get()
-            const dat = fullData.data.data
-            const getDataPem = await dat?.filter((data)=>data.Jenis === "Pembelian Barang")
+       
+            const local_pas = await JSON.parse(localStorage.getItem('data_adm'))
+            const getDataPem = await local_pas?.filter((data)=>data.Jenis === "Pembelian Barang")
             setDataPembelian(getDataPem)
-            const getDataPembyrn = await dat.filter((data)=>data.Jenis === "Pembayaran Dokter")
-            const filPmbnyrnDktr = await getDataPembyrn?.filter((data)=> data.Bersih > 0)
-            setDataPembayaran(filPmbnyrnDktr)
-            const getPend = await dat?.filter((data)=>data.Jenis === "Pendapatan Pasien")
+            const getdok = await local_pas?.filter((data)=>data.Jenis === "Pembayaran Dokter" && data.Bersih > 0)
+            setDataPembayaran(getdok)
+            const getPend = await local_pas?.filter((data)=>data.Jenis === "Pendapatan Pasien")
             setDataPendapatan(getPend)
+
+
         } catch (error) {
             console.log("Sorry something Err")
         }
@@ -60,20 +62,19 @@ function Total() {
     const getSubData = async(e)=>{
         setSelected(false)
         e.preventDefault()
+
         try {
             const searchMonth = await document.getElementById("bulan").value
-            const getSubsDPemb =  dataPembelian?.filter((data)=> new Date(data.Tanggal).toLocaleDateString().slice(0,1) === searchMonth)
-           setSubPembelian(getSubsDPemb)
-           
-            const getSubPemb = dataPembayaran?.filter((data)=>new Date(data.Tanggal).toLocaleDateString().slice(0,1) === searchMonth)
+            const data1 = dataPembelian.filter((data)=>new moment(data.Tanggal).format('MMM') === new moment(searchMonth).format('MMM'))
+            setSubPembelian(data1)
+            const getSubPemb = dataPembayaran?.filter((data)=>new moment(data.Tanggal).format('MMM') === new moment(searchMonth).format('MMM'))
             setSubDPembayaran(getSubPemb)
-
-            const getSubPend = dataPendapatan?.filter((data)=>new Date(data.Tanggal).toLocaleDateString().slice(0,1) === searchMonth)
+             
+            const getSubPend = dataPendapatan?.filter((data)=>new moment(data.Tanggal).format('MMM') === new moment(searchMonth).format('MMM'))
             setSubDPendapatan(getSubPend)
             setSearchM(searchMonth)
         } catch (error) {
-            console.log(error)
-            console.log("sorry something err")
+            
         }
 
     }
@@ -120,7 +121,7 @@ function Total() {
       
         <div>
             
-            <div style={{display:selected?"none":""}}>
+            <div style={{display:selected?"none":"block"}}>
                 <SubPembelian>{{searchM,subPembelian}}</SubPembelian>
                 <SubPembayaran>{{searchM,subDPembayaran}}</SubPembayaran>
                 <SubPendapatan>{{searchM,subDPendapatan}}</SubPendapatan>
@@ -129,7 +130,7 @@ function Total() {
             <div>
             
             </div>
-            <div style={{display:selected?"" :"none"}} >
+            <div style={{display:selected?"block" :"none"}} >
                 <Pembelian>{dataPembelian}</Pembelian>
                 <Pembayaran>{dataPembayaran}</Pembayaran>
                 <Pendapatan>{dataPendapatan}</Pendapatan>

@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import Table from 'react-bootstrap/Table';
 import './total.css'
+import moment from 'moment';
+import { _Formater } from '../../Config/Formatter';
 
 export default function (data) {
     
@@ -53,8 +55,8 @@ export default function (data) {
                         <p>Total Pembayaran: {formater.format(data.Bersih).replace("IND","Rp.")}</p>
                         <p style={{borderBottom:"5px solid black"}}></p> */}
                 
-                                <td>{new Date(data.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})}</td>
-                                <td>{formater.format(data.Bersih).replace("IND","Rp.")}</td>
+                                <td>{new moment(data.Tanggal).format('LL')}</td>
+                                <td>{_Formater.format(data.Bersih).replace("IND","Rp.")}</td>
                                 <td>{data.Ket}</td>
                              
                    
@@ -62,7 +64,7 @@ export default function (data) {
                     
                 )
               })}
-              <tr><td colSpan={'3'}>Total Semua Pembelian Barang {formater.format(total).replace("IND","Rp.")}</td>
+              <tr><td colSpan={'3'}>Total Semua Pembelian Barang {_Formater.format(total).replace("IND","Rp.")}</td>
               </tr>
               </tbody>
               </Table>

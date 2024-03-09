@@ -7,7 +7,9 @@ import axios from 'axios'
 import {useDispatch } from 'react-redux'
 import { Active } from '../Redux/Reducer/_Users'
 import CryptoJS from "crypto-js";
+
 function _Logins() {
+
   let salt = process.env.REACT_APP_SALT
   const [user,setUser] = useState([])
     const navs = useNavigate()
@@ -21,25 +23,32 @@ function _Logins() {
         },
         onError:(err)=> console.log(err)
       })
+    
+      async function exec2(){
+       const peop = localStorage.getItem('access_dental')
+        axios.get(`/.netlify/functions/exec2?peop=${peop}`,{
+        headers:{Accept:'application/json'}
+      }
+      ).then(async(res)=>{
+        
+        const outPars = res.data.outPars
+        const bytes=  CryptoJS.AES.decrypt(outPars, salt)
+        const dataD = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+        await dispatch(Active(dataD))
+        alert("Telah Login")
+        navs('/')
+            
+          })
+          .catch((err) => {
+           return null
+          });
 
+      }
     useEffect(()=>{
       if (user) {
-        axios.get(`/.netlify/functions/exec2`,{
-          headers:{Accept:'application/json'}
-        }
-        ).then(async(res)=>{
-          
-          const outPars = res.data.outPars
-          const bytes=  CryptoJS.AES.decrypt(outPars, salt)
-          const dataD = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
-          await dispatch(Active(dataD))
-          alert("Telah Login")
-          navs('/')
-              
-            })
-            .catch((err) => {alert("Sorry something wrong")});
+          exec2()
           }
-  },[user])
+  },[])
      
   return (
     <div className='containers' style={{display:'flex',justifyContent:"center"}}>
