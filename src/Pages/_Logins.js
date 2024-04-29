@@ -34,12 +34,12 @@ function _Logins() {
    const forms = new FormData(formEl)
    const uname = forms.get('username')
    const pass = forms.get('password')
-
+   const ori = process.env.SERVERS || 'http://localhost:3000'
 
     try {
       await axios.post(`${URLAPIS}account/login`,
       
-      {origin:'http://localhost:3000',
+      {origin:ori,
         username:uname,
         password:pass
       },{withCredentials:true,})
