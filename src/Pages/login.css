@@ -32,16 +32,3 @@ form#form-login{
     
     
 }
-
-@media only screen and (max-width: 600px) {
-    form#form-login {
-        color: wheat !important;
-        background: purple; /* Mengubah warna latar belakang menjadi ungu */
-        backdrop-filter: none; /* Menghapus backdrop filter */
-        box-shadow: none; /* Menghapus box-shadow */
-    }
-    .form-label{
-        color: white;
-    }
-}
-
