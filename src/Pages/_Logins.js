@@ -38,13 +38,11 @@ function _Logins() {
 
     try {
       await axios.post(`${URLAPIS}account/login`,
-      
       {origin:ori,
         username:uname,
         password:pass
       },{withCredentials:true,})
       .then((res)=>{
-        localStorage.setItem('ac',res.data.ac)
         const dt =  _TokenVal(localStorage.getItem('ac'))
         const us = jwtDecode(dt)
         dispatch(Active(us))
@@ -94,16 +92,7 @@ new Notification('test')
         
         }}>
          
-          <Form id='form-login' onSubmit={(e) => Submit(e)} style={{ 
-              maxWidth: '300px', 
-              width: '100%',
-              background: 'rgba(255, 255, 255, 0.26)', /* Warna latar belakang dengan transparansi */
-              backdropFilter: 'blur(5.9px) saturate(150%)', /* Efek backdrop filter untuk tampilan kaca */
-              borderRadius: '20px', /* Memanjangkan sudut */
-              padding: '20px' ,
-              boxShadow: '0px 4px 10px rgba(0, 0, 0, 0.1)',
-              border:' 1px solid rgba(255, 255, 255, 0.41)',
-          }}>
+          <Form id='form-login' onSubmit={(e) => Submit(e)}>
              <div className='fa-locks' style={{ marginBottom: '20px' }}> {/* Mengatur jarak bawah untuk ikon gembok */}
                 <RiLockPasswordLine  className='icon-lock'/> {/* Menambahkan ikon gembok */}
               </div>

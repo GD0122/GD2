@@ -3,6 +3,14 @@ form#form-login{
     padding: 20px;
     animation: test 1s ;
     scale: 1;
+    max-width: 300px;
+    width: 100%;
+    background: 'rgba(255, 255, 255, 0.26)'; 
+    backdrop-filter: blur(5.9px) saturate(150%);
+    border-radius: '20px';
+    padding: '20px' ;
+    box-shadow: '0px 4px 10px rgba(0, 0, 0, 0.1)';
+    border:' 1px solid rgba(255, 255, 255, 0.41)';
 
 }
 
@@ -23,5 +31,17 @@ form#form-login{
    
     
     
+}
+
+@media only screen and (max-width: 600px) {
+    form#form-login {
+        color: wheat !important;
+        background: purple; /* Mengubah warna latar belakang menjadi ungu */
+        backdrop-filter: none; /* Menghapus backdrop filter */
+        box-shadow: none; /* Menghapus box-shadow */
+    }
+    .form-label{
+        color: white;
+    }
 }
 
