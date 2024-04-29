@@ -43,7 +43,7 @@ function _Logins() {
         password:pass
       },{withCredentials:true,})
       .then((res)=>{
-        // localStorage.setItem('ac',res?.data?.ac)
+        localStorage.setItem('ac',res?.data?.ac)
         const dt =  _TokenVal(res?.data?.ac)
         const us = jwtDecode(dt)
         dispatch(Active(us))

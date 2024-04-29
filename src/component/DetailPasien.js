@@ -37,7 +37,8 @@ export function DetailPasien() {
   
  const sendWa= async(data)=>{
   const dats = _Decrypt(data)
-  window.location.href='https://wa.me/'+dats
+  const phoneNumber = dats.replace(/^0/, '62');
+  window.location.href='https://wa.me/'+phoneNumber
  }
   return (
     <div className='containers-bg' style={{ minHeight: '100vh', minWidth: '100%' }}>
