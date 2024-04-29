@@ -23,6 +23,7 @@ function _UsersVal({children}) {
                 const outPars = res.data.outPars
                 const bytes=  CryptoJS.AES.decrypt(outPars, salt)
                 const dataD = JSON.parse(bytes.toString(CryptoJS.enc.Utf8))
+                console.log(dataD.email)
                 if(dataD?.email!==process.env.REACT_APP_VER) {
                     dispatch(userLogout())
                     return Navs('/login')

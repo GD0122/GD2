@@ -1,0 +1,15 @@
+.container-page{
+    min-width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: #8a2be2;
+    position: relative;
+   
+}
+
+
+@media screen and (max-width: 768px) { /* Menargetkan perangkat dengan lebar layar maksimal 768px, misalnya perangkat seluler */
+    .img-page {
+        background-size: 150px !important; /* Mengatur ukuran latar belakang menjadi 150px */
+    }
+}

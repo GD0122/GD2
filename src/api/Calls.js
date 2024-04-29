@@ -24,3 +24,15 @@ export const Calls = [{
         desc:"Edit Barang"
     }
 }]
+
+export const Pass = [{
+    Edit:{
+        url:`http://localhost/pasien/edit/`
+    },
+    Delete:{
+        url:`http://localhost/pasien/delete/`
+    },
+    Tambah:{
+        url:`http://localhost/pasien/addPasien`
+    }
+}]

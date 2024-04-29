@@ -6,11 +6,12 @@ import CryptoJS from 'crypto-js'
 import { useDispatch } from 'react-redux'
 import { RenewPasien2 } from '../Redux/Reducer/_Pasien'
 import { Bounce, toast } from 'react-toastify'
+import { Calls } from '../api/Calls'
 function TambahJadwal({Pid,dataP,getD,showR,setShowR}) {
     const salt2 = process.env.REACT_APP_SALT2
     const salt = process.env.REACT_APP_SALT
     const [disabled,setDisabled] = useState(false)
-
+    const ApiUrl = Calls[0].api3.url
     const dispacth = useDispatch()
     async function Submit (e){
         e.preventDefault()
@@ -24,7 +25,7 @@ function TambahJadwal({Pid,dataP,getD,showR,setShowR}) {
         forms.set('NoTelp',NoE)
 
         try {
-            const data = await fetch('https://script.google.com/macros/s/AKfycbyynbQmHyt31lZudx9-FXYcQ3nudoDULcdSsT-3yZEIjVgrw38r0CTh3DsYhbez_CylZw/exec',{
+            const data = await fetch(`https://script.google.com/macros/s/${ApiUrl}/exec`,{
                 method:'POST',
                 body:forms
             })

@@ -10,6 +10,7 @@ import Pendapatan from './container/Pendapatan'
 import SubPendapatan from './container/SubPendapatan'
 import '../component/datapasien.css'
 import moment from 'moment'
+import { toast,Bounce } from 'react-toastify'
 function Total() {
     const years = new Date().getFullYear()
     const month = new Date().getMonth()+1
@@ -74,7 +75,17 @@ function Total() {
             setSubDPendapatan(getSubPend)
             setSearchM(searchMonth)
         } catch (error) {
-            
+            toast.error('Gagal', {
+                position: "top-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "light",
+                transition: Bounce,
+                });
         }
 
     }

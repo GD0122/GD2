@@ -1,0 +1,27 @@
+form#form-login{
+    border-radius:30px;
+    padding: 20px;
+    animation: test 1s ;
+    scale: 1;
+
+}
+
+@keyframes test {
+    from{
+        transform: scale(0);
+    }to{
+        transform: scale(1);
+    }
+    
+}
+.icon-lock {
+   
+    font-size: 50px;
+    border: 1px solid black;
+    border-radius: 50%;
+    padding: 10px;
+   
+    
+    
+}
+

@@ -1,11 +1,14 @@
 const axios = require('axios')
 require("dotenv").config()
 const cryptoJS = require('crypto-js')
+const { Provider } = require('react-redux')
 exports.handler = async(event,context)=>{
     let salt = process.env.REACT_APP_SALT
- 
-    try {
-        const getUser = await axios.get(`https://script.google.com/macros/s/AKfycbzx8p9Khpp1vNrMACkFyirl31m-SOqlPTMa0cF8o4IMUS06wPPF9898rrADCBdzdjUOYg/exec`,
+    const dt = process.env.REACT_APP_DT1
+    const dt2 = process.env.REACT_APP_DT2
+    const dt3 = process.env.REACT_APP_DT3
+        try {
+        const getUser = await axios.get(`https://script.google.com/macros/s/${dt}/exec`,
             {Headers:{Accept:"aplication/json"}}
         )
         .then((res)=>{
@@ -19,7 +22,7 @@ exports.handler = async(event,context)=>{
             salt
           ).toString();
 
-        const getUser1 = await axios.get(`https://script.google.com/macros/s/AKfycbyqRxKDbIHkp1dRUxRKSmJ67j-_L3OPfEGFeIBZV4ZO3MfB0g44GgnAH2Rw8ER7DpvlcA/exec`,
+        const getUser1 = await axios.get(`https://script.google.com/macros/s/${dt2}/exec`,
         {Headers:{Accept:"aplication/json"}})
         .then((res)=>{
           return res.data
@@ -32,7 +35,7 @@ exports.handler = async(event,context)=>{
         ).toString();
 
 
-        const getUser2 = await axios.get(`https://script.google.com/macros/s/AKfycbyDTTQ3-VlDnAM8uJpGNOhWqfaz03PCptpR2LE_-enSxhP4xD5OKw6TsvRpLFPuW-Oe0Q/exec`,
+        const getUser2 = await axios.get(`https://script.google.com/macros/s/${dt3}/exec`,
         {Headers:{Accept:"aplication/json"}})
         .then((res)=>{
           return res.data

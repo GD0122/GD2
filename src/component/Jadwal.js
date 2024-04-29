@@ -10,172 +10,160 @@ import 'moment/locale/id'
 import CryptoJS from 'crypto-js';
 import LoadingPage from '../Pages/LoadingPage';
 import { _Decrypt } from '../Config/_Decrypt';
+import { _addJadwal, _delJadwal, _editJadwal, URLAPIS } from '../Config/_Calls';
+import Tables from '../components/Tables';
+import Modals_comp from '../components/Modals_comp';
+import { tambah_jadwal } from '../Config/_Form';
+import _Alarm from '../components/_Alarm'
+import { useDispatch, useSelector } from 'react-redux';
+import { _getJadPas, GetJadwals, GetPasien, SelJadwal } from '../Redux/Reducer/_Pasien';
+import _InterCon from '../api/_InterCon';
+import './containers-bg.css'
 function Jadwal() {
   const salt = process.env.REACT_APP_SALT
-    const [next,setNext] = useState([])
-    const [today,setToday] = useState([])
+  const Navigates = useNavigate()
+  const dispatch = useDispatch()
+  const todayUrl = `${URLAPIS}jadwal/todays` 
+  const tommorowUrl = `${URLAPIS}jadwal/tomorrows`
+  const yesterdayUrl = `${URLAPIS}jadwal/yesterdays`
 
-    const DataFound = today?.length !==0
-    const nextDataFound = next?.length !==0
+  const [jadwals,setJadwals] = useState([])
+
+  const getjadwals = async () => {
+    try {
+      await getTodays()
+      await getTomorrow()
+      await getYesterday()
     
-   
-    const data_jdwl = async()=>{
-      try {
-        // const getJdwl = await dataP.get()
-        // .then((res)=>{
-        //     const outPars1 = res.data.out2
-         
-        //     const bytes1=  CryptoJS.AES.decrypt(outPars1, salt)
-        //     const dataD1 = JSON.parse(bytes1.toString(CryptoJS.enc.Utf8))
-          
-          
-        //    const day = dataD1['data'].filter((data)=>new moment(data.Tanggal).format('LL') === new moment().format('LL'))
-        //    setToday(day)
-        //    const nextD = dataD1['data'].filter((data)=>new moment().diff(data.Tanggal)<0)
-        //    setNext(nextD)
-           
-
-        // })
-
-        const local_pas = JSON.parse(localStorage.getItem('data_jad'))
-        const day = local_pas.filter((data)=>new moment(data.Tanggal).format('LL')  === new moment().format('LL'))
-        setToday(day)
-        const nex = local_pas.filter((data)=>new moment().diff(data.Tanggal)<0)
-         setNext(nex)
-     
-    
-      
-       
-       
-        
-      } catch (error) {
-        return Nav('/error_page')
-      }
-      
+    } catch (error) {
+      console.error('Error while fetching jadwals:', error);
     }
+  };
+  const jadwal = useSelector(SelJadwal);
 
-    const chatsWA = async(data)=>{
-      const num =  _Decrypt(data)
-      window.location.href='https://wa.me/+62'+num
+    useEffect(() => {
+      const fetchData = async () => {
+          await getjadwals();
+      };
+  
+      fetchData();
+  }, []);
+  
+  const getTodays= async(data)=>{
+
+    await dispatch(GetJadwals({url:todayUrl,page:data?.page,perPage:data?.perPage}))
   }
-  const Nav = useNavigate()
+  const getTomorrow = async(data)=>{
 
-  const goToDetail = async(info)=>{
-
-    Nav(('/detail_pasien/')+info)
+    await dispatch(GetJadwals({url:tommorowUrl,page:data?.page,perPage:data?.perPage}))
+  }
+  const getYesterday = async(data)=>{
+    
+    await dispatch(GetJadwals({url:yesterdayUrl,page:data?.page,perPage:data?.perPage}))
   }
   
 
-    useEffect(()=>{
-        data_jdwl()
-    },[])
-    
-  return (
-    <div className='containers'>
-      {!DataFound&&!nextDataFound?
-        (<>
-          <LoadingPage/>
-        </>):
-        (
-      <div>
-          <div> 
-           <h1 style={{marginTop:"100px",marginBottom:'30px'}}>Jadwal</h1>
-           </div>
-        <div>
-          <div>
-            <p>Hari ini: {moment().format('LL')}</p>
-           </div>
-          <div className='container-jdwl'>
-            <div>
-
-            <Table  striped bordered hover variant="dark" style={{fontSize:'10px'}} >
-                    <thead >
-                      <tr >
-                        <th scope="col">Nama</th>
-                        <th scope="col">Tanggal</th>
-                        <th scope="col">Jam</th>
-                        <th scope="col">Detail Pasien</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {DataFound?(
-                        today?.map((data,i)=>{
-                              return(
-                                <tr key={i}>
-                                <td>{data.Nama}</td>
-                                <td>{new Date(data.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})}</td>
-                                <td>{new Date(data.Jam).toLocaleString('id',{timeStyle:'short'}).replace('.',':')}</td>
-                                <td onClick={()=>{goToDetail(data.Id)}}>Detail Pasien</td>
-                                <td onClick={()=>chatsWA(data.NoTelp)}>Hubungi via Whatsapp</td>
-                                </tr>
-                              )
-                            })
-                      ):(
-                        <tr>
-                          <td colSpan={4}>Belum Ada Jadwal</td>
-                        </tr>
-                      )}
-                    </tbody>
-                </Table>
-              
-            </div>
-              
-          </div>
-        </div>
-        <div style={{marginTop:'50px'}} >
-          <div>
-            <p>Akan Datang</p>
-          </div>
-          <div className='container-jdwl'>
-
-              <div style={{maxWidth:'90%'}}>
-            <Table  striped bordered hover variant="dark" style={{fontSize:'10px'}} >
-                    <thead >
-                      <tr >
-                        <th scope="col">Nama</th>
-                        <th scope="col">Tanggal</th>
-                        <th scope="col">Jam</th>
-                        <th scope="col">Detail Pasien</th>
-                        <th scope='col'>Sisa Waktu</th>
-                        <th scope='col'>Info</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {nextDataFound?(
-                        next?.map((data,i)=>{
-                              return(
-                                <tr key={i}>
-                                <td>{data.Nama}</td>
-                                <td>{new Date(data.Tanggal).toLocaleString("id",{month:'long',weekday:'long',year:'numeric',day:'numeric'})}</td>
-                                <td>{new Date(data.Jam).toLocaleString('id',{timeStyle:'short'}).replace('.',':')}</td>
-                                <td onClick={()=>{goToDetail(data.Id)}}>Detail Pasien</td>
-                                <td>{new moment().diff(data.Tanggal,'days')}  Hari Lagi</td>
-                                <td onClick={()=>chatsWA(data.NoTlp)}>Hubungi via Whatsapp</td>
-                                </tr>
-                              )
-                            })
-                      ):(
-                        <tr>
-                          <td colSpan={5}>Belum Ada Jadwal</td>
-                        </tr>
-                      )}
-                    </tbody>
-                </Table>
-              
-            </div>
-             </div>
-          <div>
-
-          </div>
-          <div>
-
-          </div>
-        </div>
-        </div>
-
-
-        )
+  useEffect(() => {
+    //Jalankan transformasi hanya jika jadwal telah diperbarui
+    if (jadwal['today'] && jadwal['tomorrow'] && jadwal['yesterday']) {
+        const transformedData = {
+            today: transformData(jadwal['today']['jadwal']),
+            tomorrow: transformData(jadwal['tomorrow']['jadwal']),
+            yesterday: transformData(jadwal['yesterday']['jadwal'])
+        };
+        console.log('Modified Jadwals:', transformedData);
+        setJadwals(transformedData);
     }
+}, [jadwal])
+
+  function transformData(dataArray) {
+    if(dataArray?.length > 0){
+      return dataArray?.map(data => ({
+        createdAt: data?.createdAt,
+        id: data?.id,
+        pasienId:data?.pasienId,
+        namapasien: data?.pasien?.name,
+        tanggal: data?.tanggal,
+        waktu: data?.waktu,
+        updatedAt: data?.updatedAt
+    }));
+    }
+    return []
+    
+}
+
+const getDetails = async(data)=>{
+   return Navigates(`/detail/${data}`)
+}
+  
+   
+  return (
+    <div className='containers-bg'>
+      <div>
+        <h1 className='mt-5'>Hari Ini</h1>
+       
+      </div>
+      <div className='pt-5'>
+      {jadwals&&(
+       <div>
+        <div>
+         
+          <Tables header={"Jadwal Hari ini"} 
+           but2={'Delete Jadwal Pasien'}
+           act={_editJadwal} data={jadwals['today']}
+           act2={_delJadwal}
+           Updates={getTodays}
+           Details={true}
+           ActionDetails={getDetails}
+           //pagePaginations
+           ActionsPage={getTodays}
+           pageName={'todayLimit'}
+           totalData={jadwal&&jadwal['today']['pages']?.totalData}
+           />
+        </div>
+        <div>
+          <Tables header={"Jadwal Akan Datang"} 
+          but2={'Delete Jadwal Pasien'} 
+          act={_editJadwal} 
+          data={jadwals['tomorrow']}  
+          act2={_delJadwal}
+          Updates={getTomorrow}
+          Details={true}
+          ActionDetails={getDetails}
+          //pagepaginations
+          ActionsPage={getTomorrow}
+          pageName={'tomorrowLimit'}
+          totalData={jadwal&&jadwal['tomorrow']['pages']?.totalData}
+          />
+        </div>
+        <div>
+          <Tables header={"Jadwal Terlewat"}
+           but2={'Delete Jadwal Pasien'} 
+           act={_editJadwal} 
+           data={jadwals['yesterday']}  
+           act2={_delJadwal}
+           Updates={getYesterday}
+           Details={true}
+           ActionDetails={getDetails}
+            //pagePaginations
+            ActionsPage={getYesterday}
+            pageName={'yesterdayLimit'}
+            totalData={jadwal&&jadwal['yesterday']['pages']?.totalData}
+           />
+        </div>
+       
+       
+       
+       </div>
+       
+       
+       
+       )}
+      </div>
+         {/* <div className='pt-5'>
+          <Tables header={"Jadwal Pasien"} idPas={data.id} but2={'Delete Jadwal Pasien'} act={_editJadwal} data={data.jadwal} act2={_delJadwal}/>
+          // <Modals_comp  header={'Tambah Jadwal'} data={tambah_jadwal}  idPas={data.id} Actions={_addJadwal} but={'Tambah Jadwal'} />
+        </div> */}
         
         
     </div>

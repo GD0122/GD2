@@ -1,0 +1,40 @@
+.form-label {
+    font-family: 'Roboto', sans-serif; /* Menggunakan font Roboto */
+    font-size: 16px; /* Ukuran font */
+    color: #333; /* Warna teks */
+    margin-right: 10px; /* Jarak antara label dan select */
+}
+
+.select {
+    width: 100%;
+    max-width: 70px;
+    padding: 5px 25px 5px 10px; /* Penyesuaian padding */
+    border-radius: 5px;
+    border: 1px solid #ced4da;
+    background-color: #fff;
+    -webkit-appearance: none; /* Menghilangkan gaya default pada Safari */
+    -moz-appearance: none; /* Menghilangkan gaya default pada Firefox */
+    appearance: none; /* Menghilangkan gaya default pada browser lain */
+    font-family: 'Roboto', sans-serif; /* Menggunakan font Roboto */
+    font-size: 14px; /* Ukuran font */
+    color: #333; /* Warna teks */
+}
+
+.select option {
+    padding: 5px;
+    border-bottom: 1px solid #ced4da; /* Garis pemisah antara opsi */
+    font-family: 'Roboto', sans-serif; /* Menggunakan font Roboto */
+    font-size: 14px; /* Ukuran font */
+    color: #333; /* Warna teks */
+}
+
+/* Menambahkan hover effect untuk opsi */
+.select option:hover {
+    background-color: #f8f9fa;
+}
+
+/* Menambahkan styling untuk opsi terakhir */
+.select option:last-child {
+    font-weight: bold; /* Membuat teks lebih tebal */
+    color: #333; /* Warna teks */
+}

@@ -1,15 +1,17 @@
 import React from 'react'
-import Spinner from 'react-bootstrap/Spinner';
+import './loadingpage.css'
 
-export default function LoadingPage() {
+export default function LoadingPage({text}) {
   return (
-    <div style={{zIndex:'1000',overflowX:'hidden', height:'100%',width:'100%',position:'absolute',display:'flex',margin:'0px',alignItems:'center',justifyContent:'center'
-    ,overflow:'hidden'
-     }}>
-        <div >
-            <h1>Loading Data <Spinner animation="grow" /></h1>
-        </div>
-      
+    <div className="loading-container">
+      <div className='mb-2 mt-2'>
+        <img className='img-flip' width={'100px'} height={'100px'} src={process.env.PUBLIC_URL+'/assets/bg-loading.webp'} />
+      </div>
+      <div className="loading-animation">
+        <div className="loading-dot dot1"></div>
+        <div className="loading-dot dot2"></div>
+        <div className="loading-dot dot3"></div>
+      </div>
     </div>
   )
 }

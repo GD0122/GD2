@@ -14,10 +14,13 @@ import { Modal } from 'react-bootstrap';
 import { Makeid } from '../Config/MakeId';
 import moment from 'moment';
 import { Bounce, toast } from 'react-toastify';
-
+import { Calls } from '../api/Calls';
 
 
 function DataPasien() {
+
+    const ApiUrl = Calls[0].api1.url
+
     const salt = process.env.REACT_APP_SALT
     const salt2 = process.env.REACT_APP_SALT2
     const [datap,SetDatap] = useState([])
@@ -123,7 +126,7 @@ function DataPasien() {
 
 
     try {
-      const datas = await fetch('https://script.google.com/macros/s/AKfycbwMJlEws4b5DABDBNI26knodwudspyfiFHeasrFAIwy-vquwGtVaPkEKMJahXXWcvH2ug/exec',{
+      const datas = await fetch(`https://script.google.com/macros/s/${ApiUrl}/exec`,{
         method:"POST",
         body: forms
     })

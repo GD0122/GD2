@@ -1,0 +1,8 @@
+.containers-bg{
+    background-color: #8a2be2;
+    padding-bottom: 30px;
+    padding-top: 30px;
+    color: white;
+    min-height: 100vh;
+    min-width: 100%;
+}

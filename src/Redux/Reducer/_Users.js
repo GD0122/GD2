@@ -2,7 +2,9 @@
 import { googleLogout } from "@react-oauth/google";
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { Navigate, useNavigate } from "react-router-dom";
-
+import _InterCon from "../../api/_InterCon";
+import axios from 'axios'
+import { act } from "react-dom/test-utils";
 
 
 
@@ -10,10 +12,29 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 export const userLogout = createAsyncThunk(
     'user/logout',async()=>{
-        googleLogout()
-        localStorage.removeItem('access_dental')
-        localStorage.clear()
         
+       return new Promise((resolve,reject)=>{
+
+       })
+        
+    }
+)
+
+
+export const _GetUser = createAsyncThunk(
+    'user/profiles',async()=>{
+
+        try {
+            const users = await _InterCon.get('http://localhost:5500/account/users',{
+                withCredentials:true
+            }).then(res=>{
+                localStorage.setItem('users',JSON.stringify(res.data.user))
+                return res.data.user})
+            .catch((err)=>{throw err.data})
+        } catch (error) {
+            return error
+        }
+     
     }
 )
 
@@ -21,7 +42,7 @@ export const userLogout = createAsyncThunk(
     name:'user',
     initialState:{
         Loading:false,
-        Err:null,
+        Err:false,
         Users:[],
     },
     reducers:{
@@ -31,7 +52,7 @@ export const userLogout = createAsyncThunk(
         },Error:(state,action)=>{
             return {...state,Err:action.payload}
         },
-        Logout:(state,action)=>{
+        _uLogout:(state,action)=>{
             return {...state,Users:[]}
         }
     },
@@ -43,6 +64,16 @@ export const userLogout = createAsyncThunk(
         .addCase(userLogout.rejected,(state,action)=>{
             return <Navigate to='/login'/>
         })
+        .addCase(_GetUser.pending,(state,action)=>{
+            return {...state,Loading:true}
+        })
+        .addCase(_GetUser.fulfilled,(state,action)=>{
+            return {...state,Users:[action.payload],Err:false,Loading:false}
+        })
+        .addCase(_GetUser.rejected,(state,action)=>{
+            return {...state,Err:true,Loading:false}
+        })
+      
     }
 
 
@@ -50,8 +81,9 @@ export const userLogout = createAsyncThunk(
 
 
 export const SelUsers = state => state.user.Users
-
-export const {Active,Error,Logout} = UserSlice.actions
+export const _LoadUsers = state => state.user.Loading
+export const _UserErr = state => state.user.Err
+export const {Active,Error,_uLogout} = UserSlice.actions
 
 
 export default UserSlice.reducer
