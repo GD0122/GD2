@@ -56,10 +56,10 @@ function AddImgModals({...props}) {
                         'Content-Type': 'multipart/form-data'
                     }
                 });
-                console.log(response.data.message);
+           
                 Message({type : 'succes', message: response?.data?.message || "file berhasil diupload" })
             } catch (error) {
-                console.log(error)
+             
                 Message({type:'error',message:error?.response?.data?.message || "maaf ada sesuatu yang salah"})
                 setLoad(false)
             }

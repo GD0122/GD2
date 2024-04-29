@@ -31,24 +31,10 @@ function Home() {
  }
 
 
- const CheckCookie = async () => {
-    try {
-        const response = await axios.get('https://test-apis-five.vercel.app/check-cookie',{withCredentials:true});
-       
-        console.log(response.data);
-    } catch (error) {
-        console.error('Error:', error);
-    }
-};
 
-const getCookie = async()=>{
-  
-    const response2 = await axios.post('https://test-apis-five.vercel.app/tester',{origin},{withCredentials:true});
-    console.log('rsa',response2)
-}
+
  useEffect(()=>{
     Search()
-    // getCookie()
   
     document.title = 'Galuh Dental | Home'
  },[])
@@ -102,7 +88,7 @@ const handlerActionsPage = async(data)=>{
          />
         </div>
         <div  >
-        {
+           {
                 isLoad ? (
                     Err ? <h1>Gagal Memuat Data..</h1> : <_LoadingD/>
                 ) : (

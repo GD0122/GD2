@@ -19,6 +19,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { _getJadPas, GetJadwals, GetPasien, SelJadwal } from '../Redux/Reducer/_Pasien';
 import _InterCon from '../api/_InterCon';
 import './containers-bg.css'
+import DigitalClock from '../components/DigitalClock';
 function Jadwal() {
   const salt = process.env.REACT_APP_SALT
   const Navigates = useNavigate()
@@ -36,7 +37,7 @@ function Jadwal() {
       await getYesterday()
     
     } catch (error) {
-      console.error('Error while fetching jadwals:', error);
+      // console.error('Error while fetching jadwals:', error);
     }
   };
   const jadwal = useSelector(SelJadwal);
@@ -71,7 +72,7 @@ function Jadwal() {
             tomorrow: transformData(jadwal['tomorrow']['jadwal']),
             yesterday: transformData(jadwal['yesterday']['jadwal'])
         };
-        console.log('Modified Jadwals:', transformedData);
+     
         setJadwals(transformedData);
     }
 }, [jadwal])
@@ -99,9 +100,14 @@ const getDetails = async(data)=>{
    
   return (
     <div className='containers-bg'>
+      <div >
+        <h1 style={{marginTop:'100px'}}>Hari Ini</h1>
+      
+        
+      
+      </div>
       <div>
-        <h1 className='mt-5'>Hari Ini</h1>
-       
+        <DigitalClock/>
       </div>
       <div className='pt-5'>
       {jadwals&&(

@@ -14,7 +14,7 @@ function ControlsImg(props) {
     const toggleMenu = async()=>{
           setIsOpen(!isOpen)
     }
-    console.log(props)
+
   
 
     const [isOpens, setIsOpens] = useState(false);
@@ -31,7 +31,6 @@ function ControlsImg(props) {
   const handleDelete = async () => {
     // Logika untuk menghapus gambar
 
-    console.log('Menghapus gambar...');
     try {
      const delImg = await _InterCon.delete(`${URLAPIS}files/gambar/delete?pasienId=${props.idP}&imgId=${props.imgId}&imgGdId=${props?.imgGdId}`,
     {withCredentials:true})

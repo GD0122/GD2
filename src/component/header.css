@@ -1,4 +1,6 @@
-
+*{
+  border:'0px' !important;
+}
 .bg-body-tertiary{
     position: fixed;
     width: 100%;
@@ -31,6 +33,7 @@
 
   }
 
+ 
   @keyframes Animation {
     0%{background-position:10% 0%}
     50%{background-position:91% 100%}

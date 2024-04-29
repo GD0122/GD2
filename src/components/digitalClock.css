@@ -1,0 +1,17 @@
+.digital-clock {
+    font-family: Arial, sans-serif;
+    text-align: center;
+  }
+  
+  .clock {
+    font-size: 2rem;
+    color: #333;
+  }
+  
+  .hour,
+  .minute,
+  .second {
+    padding: 0.2em;
+    background-color: #eee;
+    border-radius: 0.2em;
+  }

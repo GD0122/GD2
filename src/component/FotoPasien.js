@@ -56,7 +56,7 @@ class FotoPasien extends Component {
                 isLoading:false
             });
         } catch (error) {
-            console.log('error');
+            // console.log('error');
         }
     }
     handlerActionsPage = async () => {
@@ -73,7 +73,7 @@ class FotoPasien extends Component {
                 isLoading:false
             });
         } catch (error) {
-            console.log('error');
+            // console.log('error');
         }
     }
     handlerActivePages = async(newPage)=>{

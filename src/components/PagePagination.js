@@ -38,7 +38,7 @@ componentDidUpdate(prevProps) {
             await this.props?.Actions({page:dataIndex,perPage:this.state.perPage});
             await this.props?.OnPageChange(dataIndex)   
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     
     }

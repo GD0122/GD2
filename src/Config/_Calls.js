@@ -27,7 +27,7 @@ export const _addPass = (data)=>{
             if(error.code === "ERR_NETWORK"){
               return reject("Upss...mohon tunggu sebentar")
             }
-            console.log(error)
+          
             reject(error?.response?.data?.message || error.response.data || "Upss...mohon tunggu sebentar")
          }
     })
@@ -66,7 +66,7 @@ export const _addRekam = (data)=>{
 export const _addJadwal = (data)=>{
 
    return new Promise(async(resolve,reject)=>{
-      console.log("this",data)
+
        try {
            const dt =  await _InterCon.post(`${URLAPIS}jadwal/tambah_jadwal/${data.idP}`,{
             waktu:data.waktu,
@@ -83,7 +83,7 @@ export const _addJadwal = (data)=>{
            if(error.code === "ERR_NETWORK"){
              return reject("Upss...mohon tunggu sebentar")
            }
-           console.log("dasdas",error)
+    
            reject(error?.response?.data?.message || error.response.data || "Upss...mohon tunggu sebentar")
         }
    })
@@ -123,7 +123,7 @@ export const _editPas = async(data)=>{
 
 export const _editRekam = async(data)=>{
    return new Promise(async(resolve,reject)=>{
-      console.log('tjhsa',data.id)
+
        try {
            const dt =  await _InterCon.put(`${URLAPIS}rekam/edit/${data?.id}`,{
               tindakan:data?.tindakan,
@@ -153,7 +153,7 @@ export const _editRekam = async(data)=>{
 
 export const _editJadwal = async(data)=>{
    return new Promise(async(resolve,reject)=>{
-      console.log('tjhsa',data)
+
        try {
            const dt =  await _InterCon.put(`${URLAPIS}jadwal/edit/${data?.id}`,{
               waktu:data.waktu,
@@ -243,8 +243,7 @@ export const _delJadwal = async(data)=>{
 
 export const _addJad = async(data)=>{
    return new Promise(async(resolve,reject)=>{
-      console.log("this",data.id)
-      console.log(typeof data.tanggal)
+
       try {
           const dt =  await _InterCon.post(`${URLAPIS}jadwal/tambah_jadwal/${data?.id}`,
         {
@@ -255,7 +254,7 @@ export const _addJad = async(data)=>{
          .catch((err)=>{
            throw err
          }).then((res)=>{
-            console.log(res)
+   
             return res.data.message
          })
           resolve(dt)
