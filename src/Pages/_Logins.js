@@ -83,7 +83,7 @@ useEffect(()=>{
 
 
 
-new Notification('test')
+
      
   return (
 
@@ -99,13 +99,16 @@ new Notification('test')
               <fieldset disabled={disabled}>
                   <Form.Group controlId="formBasicEmail">
                       <Form.Label>Username</Form.Label>
-                      <Form.Control type="text" autoComplete='off' name="username" placeholder="Enter username" required style={{ borderRadius: '20px', marginBottom: '15px' }} />
+                      <Form.Control type="text" autoComplete='off' name="username" placeholder="Enter username" required style={{ borderRadius: '20px', marginBottom: '15px',
+                      maxWidth:'97%',margin:'auto' }} />
                   </Form.Group>
                   <Form.Group controlId="formBasicPassword">
                       <Form.Label>Password</Form.Label>
-                      <Form.Control type="password" autoComplete='off' name="password" placeholder="Password" required style={{ borderRadius: '20px', marginBottom: '15px' }} />
+                      <Form.Control  type="password" autoComplete='off' name="password" placeholder="Password" required style={{ borderRadius: '20px', marginBottom: '15px',
+                       maxWidth:'97%',margin:'auto' }} />
                   </Form.Group>
-                  <Button type='submit' style={{ width: '100%', borderRadius: '20px', backgroundColor: '#007bff', border: 'none' }}>
+                  <Button type='submit' style={{ width: '100%', borderRadius: '20px', backgroundColor: '#007bff', border: 'none'
+                   ,marginTop:'30px' }}>
                       Login
                   </Button>
               </fieldset>
