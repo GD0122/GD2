@@ -6,11 +6,22 @@
 }
 
 .foto-wrapper {
-    position: relative;
+    /* position: relative;
     margin: 5px;
     border: 10px solid transparent; /* Menggunakan border transparan */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-    transition: box-shadow 0.3s ease;
+    /* box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    transition: box-shadow 0.3s ease;  */
+    border: 10px solid #0000;
+    box-shadow: 0 0 10px #00000080;
+    margin: 5px;
+    position: relative;
+    transition: box-shadow .3s ease;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: stretch;
+    width: 150px;
+    height: fit-content;
 }
 
 /* Efek hover */
@@ -32,10 +43,14 @@
 }
 
 .foto {
-    width: 100px;
+    /* width: 100px;
     height: 100px;
     cursor: pointer;
-    transition: transform 0.2s;
+    transition: transform 0.2s; */
+    cursor: pointer;
+    height: 100px;
+    transition: transform .2s;
+    width: fit-content;
 }
 
 .foto:hover,
@@ -76,9 +91,9 @@
 
 .img-preview{
     min-height: 400px;
-    min-width: 600px;
+    min-width: 100%;
     max-height: 400px;
-    max-width: 600px;
+    max-width: 100%;
 }
 
 .hamburger-menu {
