@@ -80,6 +80,7 @@ export const getRekamPas = createAsyncThunk(
         {origin:'http://localhost:3000'},{
             withCredentials:true
         })
+      
         return rekam.data
 
     }
@@ -214,6 +215,7 @@ const PasienSlice = createSlice({
             return {...state,Err:true}
         })
         .addCase(getRekamPas.fulfilled,(state,action)=>{
+            console.log('this',action.payload)
             return {...state,Rekam:action.payload,isLoading:false,Err:false}
         })
         // .addCase(getRekamPas.pending,(state,action)=>{
