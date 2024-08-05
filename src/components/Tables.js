@@ -30,7 +30,7 @@ function Tables(props) {
     <tr>
       {Object.keys(tableData[0]).map((key, index) => (
            <th key={index} hidden={key==='id' || key === 'pasienId' || key === "noTelp" }>
-             {key ==='tgl_tdkn'?'Tanggal Tindakan': key === 'updatedAt'? "Terakhir di Ubah": key === 'createdAt' ?"Tanggal Tindakan"  :  capitalizeFirstLetter(key) }
+             {key ==='tgl_tdkn'?'Tanggal Tindakan': key === 'updatedAt'? "Terakhir di Ubah": key === 'createdAt' ?"Tanggal di Buat"  :  capitalizeFirstLetter(key) }
            </th>
       ))}
       <th>Edit</th>
