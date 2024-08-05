@@ -38,11 +38,12 @@ export const _addRekam = (data)=>{
    return new Promise(async(resolve,reject)=>{
        try {
            const dt =  await _InterCon.post(`${URLAPIS}rekam/tambah_rekam/${data.idP}`,{
-            tindakan:data.tindakan,
             terapi:data.terapi,
             dokter:data.dokter,
             perawat:data.perawat,
             diagnosa:data.diagnosa,
+            pro:data.pro,
+            tgl_tdkn:data.tgl_tdkn,
             _csrf:data?.cs
           },{withCredentials:true})
           .catch((err)=>{
@@ -126,8 +127,10 @@ export const _editRekam = async(data)=>{
 
        try {
            const dt =  await _InterCon.put(`${URLAPIS}rekam/edit/${data?.id}`,{
-              tindakan:data?.tindakan,
+
               diagnosa:data?.diagnosa,
+              pro:data?.pro,
+              tgl_tdkn:data?.tgl_tdkn,
               dokter:data.dokter,
               perawat:data?.perawat,
               terapi:data.terapi,

@@ -115,13 +115,13 @@ class Modals_Comp extends Component {
                      </Form.Group>
                     {this.props.data && this.props.data.map((data, i) => {
                     const locale = 'id-ID';
-                    const defaultValue = data.type === 'date' ? (data.val ? new Date(data.val) : new Date()).toISOString(locale).split('T')[0] : data.val;
+                    const defaultValue = data.type === 'date' || data.name === 'tgl_tdkn' ? (data.val ? new Date(data.val) : new Date()).toISOString(locale).split('T')[0] : data.val;
                      return (
                         <Form.Group key={i} className="mb-2" controlId="formBasicEmail">
                           <Form.Label hidden={data.name === 'id' || data.name === 'pasienId' || data.name === 'createdAt' || data.name === 'updatedAt'}>
-                            {data.name === 'createdAt' ? "tanggal" : data.name}
+                            {data.name === 'createdAt' ? "tanggal"  : data.name}
                           </Form.Label>
-                          <Form.Control type={data.type}
+                          <Form.Control type={data.name === 'tgl_tdkn'?'date':data.type}
                            
                           name={data.name}  defaultValue={defaultValue} placeholder={data.name} 
                            hidden={data.name === 'id' || data.name === 'pasienId' || data.name === 'createdAt' || data.name === 'updatedAt'} pattern={data?.patern}

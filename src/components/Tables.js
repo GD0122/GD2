@@ -30,7 +30,7 @@ function Tables(props) {
     <tr>
       {Object.keys(tableData[0]).map((key, index) => (
            <th key={index} hidden={key==='id' || key === 'pasienId' || key === "noTelp" }>
-             {key ==='tindakan'?'Pro': key === 'updatedAt'? "Terakhir di Ubah": key === 'createdAt' ?"Tanggal Tindakan"  :  capitalizeFirstLetter(key) }
+             {key ==='tgl_tdkn'?'Tanggal Tindakan': key === 'updatedAt'? "Terakhir di Ubah": key === 'createdAt' ?"Tanggal Tindakan"  :  capitalizeFirstLetter(key) }
            </th>
       ))}
       <th>Edit</th>
@@ -49,7 +49,7 @@ function Tables(props) {
         {Object.keys(data).map((key, colIndex) => (
          <td key={colIndex} hidden={key==='id' ||  key === 'pasienId' || key === "noTelp"   }>
           {
-          key === 'tanggal' || key === 'updatedAt' || key === 'createdAt' ? new moment(data[key]).format('LL') : data[key]
+          key === 'tanggal' || key === 'updatedAt' || key === 'tgl_tdkn' || key === 'createdAt' ? new moment(data[key]).format('LL') : data[key]
           
           }</td> 
          
